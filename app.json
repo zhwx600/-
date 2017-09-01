@@ -1,0 +1,11 @@
+{
+  "pages": [
+    "pages/center/chome/chome"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#0FC1A1",
+    "navigationBarTitleText": "美美购",
+    "navigationBarTextStyle": "white"
+  }
+}

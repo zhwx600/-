@@ -1,0 +1,138 @@
+/* chome.wxss */
+
+/* @import "./../../../app.wxss"; */
+
+page, .page {
+    height: 100%;
+    /* font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, 'Droid Sans Fallback', 'Microsoft Yahei', sans-serif; */
+}
+
+.page-bottom {
+    height: 100%;
+    width: 75%;
+    position: fixed;
+    background-color: white;
+    z-index: 0;
+}
+
+.page-bottom-icon {
+    height: 40rpx;
+    width: 40rpx;
+    /* position: relative;  */
+    margin-right: 30rpx;
+    vertical-align: -5rpx;
+}
+
+.userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50rpx;
+}
+
+.userinfo-avatar {
+    width: 128rpx;
+    height: 128rpx;
+    margin: 20rpx;
+    border-radius: 50%;
+}
+
+.userinfo-nickname {
+    color: gray;
+    font-size: 40rpx;
+}
+
+.wc {
+    color: black;
+    padding: 40rpx 0rpx 40rpx 160rpx;
+    width: 300rpx;
+    text-align: left;
+    font-size: 34rpx;
+}
+
+.page-content {
+    padding-top: 80rpx;
+}
+
+/******************* top******************  */
+
+.c-state1 {
+    transform: rotate(0deg) scale(1) translate(75%, 0%);
+    -webkit-transform: rotate(0deg) scale(1) translate(75%, 0%);
+}
+
+.c-state2 {
+    transform: rotate(0deg) scale(0.8) translate(75%, 0%);
+    -webkit-transform: rotate(0deg) scale(0.8) translate(75%, 0%);
+}
+
+/******************* top******************  */
+
+.page-top {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 0;
+    transition: All 0.4s ease;
+    -webkit-transition: All 0.4s ease;
+    /* display: inline-flex; */
+    border-left: 1px solid gainsboro;
+}
+
+.page-top-leftimage {
+    position: absolute;
+    width: 48rpx;
+    height: 50rpx;
+    left: 30rpx;
+    top: 20rpx;
+    /* background-color: red; */
+}
+
+.page-top-rightimage {
+    position: absolute;
+    width: 52rpx;
+    height: 42rpx;
+    /* left: 300rpx; */
+    right: 40rpx;
+    top: 25rpx;
+}
+
+.page-top-nav {
+    height: 88rpx;
+    width: 100%;
+}
+
+/******************* 功能区域******************  */
+
+.func-father {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.func-tip {
+    display: flex;
+    justify-content: center;
+    margin-top: 30rpx;
+    width: 280rpx;
+    font-size: 28rpx;
+    border-radius: 6rpx;
+    -webkit-text-fill-color: white;
+}
+
+.func-tip-guide {
+    width: 534rpx;
+    height: 698rpx;
+}
+
+.func-scan-icon {
+  margin-top: 20rpx;
+    width: 160rpx;
+    height: 160rpx;
+}
+
+.func-scan-text {
+    margin-top: 10rpx;
+    font-size: 28rpx;
+}

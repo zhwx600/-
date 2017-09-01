@@ -1,0 +1,44 @@
+<!--chome.wxml-->
+<view class="page">
+    <view class="page-bottom">
+        <view class="page-content">
+            <view bindtap="bindViewTap" class="userinfo">
+                <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+                <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+            </view>
+
+            <view class="wc">
+                <image class="page-bottom-icon" src="./../../../images/icon-order-l@3x.png"></image>
+                <text>订单</text>
+            </view>
+            <view class="wc">
+                <image class="page-bottom-icon" src="./../../../images/icon-coupons-l@3x.png"></image>
+                <text>钱包</text>
+            </view>
+            <view class="wc">
+                <image class="page-bottom-icon" src="./../../../images/icon-bar-l@3x.png"></image>
+                <text>核验账单</text>
+            </view>
+            <view class="wc">
+                <image class="page-bottom-icon" src="./../../../images/icon-setup-l@3x.png"></image>
+                <text>设置</text>
+            </view>
+        </view>
+    </view>
+    <view bindtouchmove="tap_drag" bindtouchend="tap_end" bindtouchstart="tap_start" class="page-top" style="{{translate}}">
+        <!--导航栏  -->
+        <view class="page-top-nav main-color">
+            <image id="headicon1" class="page-top-leftimage" catchtap="tap_ch" src="./../../../images/Male-User@3x.png"></image>
+            <image id="headicon2" class="page-top-rightimage" catchtap="onTapCart" src="./../../../images/shopping-cart@3x.png"></image>
+        </view>
+        <!--功能区域  -->
+        <view class='func-father'>
+            <view class="func-tip main-color">边拿边扫自助买单</view>
+            <image class="func-tip-guide" src="./../../../images/guide-map@3x.png"></image>
+            <image id="headicon3" class="func-scan-icon" catchtap='onTapScan' src="./../../../images/btn-scan@3x.png"></image>
+            <view class="func-scan-text">开始扫货</view>
+        </view>
+
+
+    </view>
+</view>
