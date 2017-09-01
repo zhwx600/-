@@ -18,7 +18,7 @@ Page({
     translate: '',
     userInfo: {
       avatarUrl:'./../../../images/guide-map@3x.png',
-      nickName:'暂无昵称'
+      nickName:'无昵称'
     }
   },
   tap_ch: function (e) {
@@ -146,7 +146,9 @@ Page({
   onTapScan:function(e){
 
     console.log("onTapScan", e)
-
+    wx.navigateTo({
+      url: '../scan/scan',
+    })
   },
 
   /**

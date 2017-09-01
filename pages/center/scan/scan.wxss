@@ -1,0 +1,123 @@
+/* pages/center/Scan/scan.wxss */
+
+.all-content {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(180, 180, 180);
+    height: 100%;
+    width: 100%;
+}
+
+.tip-text {
+    margin-top: 50rpx;
+    color: white;
+    font-size: 30rpx;
+}
+
+.scan-image-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80rpx;
+    width: 100%;
+    height: 600rpx;
+    background-color: rgb(222, 222, 222);
+}
+
+.scan-image-bg {
+    width: 500rpx;
+    height: 500rpx;
+}
+
+/* 解决居中问题 暂时采用了 固定坐标 */
+.tip-text-scan {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36rpx;
+    color: #0fc1a1;
+    /* background-color: red; */
+    top: 170rpx;
+    left: 0rpx;
+    width: 100%;
+    height: 600rpx;
+}
+
+.clart-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40rpx;
+    width: 100%;
+    height: 150rpx;
+    /* background-color: rgb(222, 222, 222); */
+}
+
+.clart-content image {
+    width: 120rpx;
+    height: 120rpx;
+    margin-right: 15rpx;
+}
+
+.settler-text {
+    padding: 15rpx 30rpx;
+    margin-left: 15rpx;
+    background-color: #0fc1a1;
+    color: white;
+    border-radius: 10rpx;
+}
+
+.bottom-tool-content {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0rpx;
+    width: 100%;
+    height: 120rpx;
+    background-color: white;
+}
+
+.input-tip {
+    position: absolute;
+    top: 35rpx;
+    width: 45rpx;
+    height: 37rpx;
+    left: 40rpx;
+}
+
+.input-view {
+    position: absolute;
+    height: 68rpx;
+    left: 20rpx;
+    right: 240rpx;
+    top: 20rpx;
+    bottom: 20rpx;
+    padding-left: 80rpx;
+    font-size: 28rpx;
+    border-radius: 10rpx;
+    background-color: rgb(242, 242, 242);
+}
+
+.query-button {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 30rpx;
+    top: 20rpx;
+    width: 180rpx;
+    height: 68rpx;
+    font-size: 30rpx;
+    color: white;
+    border-radius: 10rpx;
+}
+
+/* <view class='bottom-tool-content'>
+    <image class='input-tip' src='./../../../images/shopping-cart@3x.png'></image>
+        <textarea class='input-view' placeholder='请手动输入商品条码'></textarea>
+        
+        <view class='query-button main-color'>查找</view>
+    </view> */

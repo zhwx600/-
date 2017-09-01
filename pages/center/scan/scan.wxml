@@ -1,0 +1,26 @@
+<!--pages/center/Scan/scan.wxml-->
+
+<view class='all-content'>
+
+    <text class='tip-text'>购物车空空如也，快开始扫码购物吧</text>
+
+    <view class='scan-image-content'>
+        <image class='scan-image-bg' src='./../../../images/scanning-frame@3x.png'></image>
+
+        <text class='tip-text-scan'>点我扫码</text></view>
+
+
+    <view class='clart-content'>
+        <image src='./../../../images/shopping-cart@3x 2.png'></image>
+        <text class='settler-text'>结账:￥10.00</text>
+    </view>
+
+
+    <view class='bottom-tool-content'>
+    
+        <input class='input-view' placeholder='请手动输入商品条码' maxlength='20' auto-height='false' type='number'></input>
+        <image class='input-tip' src='./../../../images/shopping-input@3x.png'></image>
+        <view class='query-button main-color'>查找</view>
+    </view>
+
+</view>
