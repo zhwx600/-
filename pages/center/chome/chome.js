@@ -17,8 +17,8 @@ Page({
     staus: 1,
     translate: '',
     userInfo: {
-      avatarUrl:'./../../../images/guide-map@3x.png',
-      nickName:'无昵称'
+      pic:'./../../../images/guide-map@3x.png',
+      nickname:'',
     }
   },
   tap_ch: function (e) {
@@ -52,6 +52,17 @@ Page({
       // staus = 2指屏幕滑动到右边的状态
       this.data.startmark = e.touches[0].pageX;
     }
+
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
+      that.setData({
+        userInfo: userInfo
+      })
+    })
+
+
 
   },
   tap_drag: function (e) {

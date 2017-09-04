@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/center/chome/chome",
-    "pages/center/scan/scan"
+    "pages/center/scan/scan",
+    "pages/center/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
