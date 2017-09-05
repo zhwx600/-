@@ -3,6 +3,10 @@ var apiRoot = 'http://120.25.103.145:5501/' + 'mkps';
 var api = {
   loginUrl: apiRoot + '/user/appLogIn',
   userInfoUrl: apiRoot + '/user/getUserInfo',
+  barcodeGoods: apiRoot +'/goods/getGoodsInfoByBarCode',
+  cartList: apiRoot + '/goodsCar/getGoodsCarInfo',
+  addCart: apiRoot + '/goodsCar/addGoodsCar',
+  delCart: apiRoot + '/goodsCar/delGoodsCarInfo',
 };
 
 

@@ -1,0 +1,2 @@
+<!--pages/center/Cart/cart.wxml-->
+<text>{{page}}.wxml</text>

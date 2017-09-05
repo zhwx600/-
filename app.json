@@ -2,12 +2,19 @@
   "pages": [
     "pages/center/chome/chome",
     "pages/center/scan/scan",
-    "pages/center/logs/logs"
+    "pages/center/logs/logs",
+    "pages/center/cart/cart"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#0FC1A1",
     "navigationBarTitleText": "美美购",
     "navigationBarTextStyle": "white"
+  },
+  "networkTimeout": {
+    "request": 15000,
+    "connectSocket": 15000,
+    "uploadFile": 30000,
+    "downloadFile": 30000
   }
 }

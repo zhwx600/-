@@ -164,7 +164,51 @@ App({
     },
     nuserInfo: {
     },
+    shopId:'5992b8825a8e730418638009',//湖里沃尔玛
     firstPage: null,
   },
 
 })
+
+
+
+
+//请求模板
+
+// requestGoodsInfo: function (cb) {
+
+//   wx.showLoading({
+//     title: '',
+//     // mask: true,
+//   })
+//   var tUrl = api.api.barcodeGoods;
+//   api.requestGet({
+//     url: tUrl,
+//     data: {
+//       shopId: getApp().globalData.shopId,
+//       barCode: this.data.currentCode,
+//     },
+//     success: function (res) {
+//       wx.hideLoading();
+//       if (res.code == 200) {
+//         console.log(tUrl, '请求成功', res.data);
+//         typeof cb == "function" && cb(res.data)
+
+//       } else {
+//         console.log(tUrl, '请求失败', res.code, res.data);
+//         typeof cb == "function" && cb()
+//       }
+
+//     },
+//     fail: function (res) {
+//       {
+//         wx.hideLoading();
+//         console.log(tUrl, '网络请求失败', res.code);
+//         typeof cb == "function" && cb()
+//       }
+
+//     }
+//   });
+
+// },
+

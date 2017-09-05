@@ -4,23 +4,25 @@
 
     <text class='tip-text'>购物车空空如也，快开始扫码购物吧</text>
 
-    <view class='scan-image-content'>
+    <view class='scan-image-content' bindtap='onTapScan'>
         <image class='scan-image-bg' src='./../../../images/scanning-frame@3x.png'></image>
 
         <text class='tip-text-scan'>点我扫码</text></view>
 
 
-    <view class='clart-content'>
-        <image src='./../../../images/shopping-cart@3x 2.png'></image>
-        <text class='settler-text'>结账:￥10.00</text>
+    <view class='cart-content'>
+        <image src='./../../../images/shopping-cart@3x 2.png' bindtap='onTapCart'></image>
+        <text class="cart-goods-count {{cartCount>0?'show-flex-view':'hide-view'}} ">{{cartCount}}</text>
+
+        <text class='settler-text' bindtap='onTapCart'>结账:￥{{money}}</text>
     </view>
 
 
     <view class='bottom-tool-content'>
     
-        <input class='input-view' placeholder='请手动输入商品条码' maxlength='20' auto-height='false' type='number'></input>
+        <input class='input-view' placeholder='请手动输入商品条码' maxlength='20' auto-height='false' type='number' bindinput="bindKeyInput" ></input>
         <image class='input-tip' src='./../../../images/shopping-input@3x.png'></image>
-        <view class='query-button main-color'>查找</view>
+        <view class='query-button main-color' bindtap='onTapQuery'>查找</view>
     </view>
 
 </view>
