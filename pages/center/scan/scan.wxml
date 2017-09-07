@@ -19,10 +19,47 @@
 
 
     <view class='bottom-tool-content'>
-    
-        <input class='input-view' placeholder='请手动输入商品条码' maxlength='20' auto-height='false' type='number' bindinput="bindKeyInput" ></input>
+
+        <input class='input-view' placeholder='请手动输入商品条码' maxlength='20' auto-height='false' type='number' bindinput="bindKeyInput"></input>
         <image class='input-tip' src='./../../../images/shopping-input@3x.png'></image>
         <view class='query-button main-color' bindtap='onTapQuery'>查找</view>
     </view>
 
+</view>
+
+
+
+
+
+
+
+
+
+
+
+<!--mask-->
+<view class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+    <!--drawer content-->
+    <view class="drawer_title">{{scanGoodsInfo.goodsName}}</view>
+    <view class="price">￥{{scanGoodsInfo.price}}</view>
+    <view class="btn-box">
+        <image class="del-btn" src='./../../../images/btn-reduce@3x.png' bindtap="onDelCount">-
+        </image>
+        <view class='buy-count'>{{willBuyCount}}</view>
+        <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onAddCount">-
+        </image>
+
+    </view>
+
+    <view class="fuc-box">
+        <view class="btn-cancel" bindtap="onTapCancelAdd">取消</view>
+        <view class="btn-add-cart" bindtap="onTapAddCart">加入购物车</view>
+        <view class="btn-add-cart-scan" bindtap="onTapAddCartScan">加入并扫码</view>
+
+
+    </view>
 </view>

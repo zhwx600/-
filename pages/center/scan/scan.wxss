@@ -75,9 +75,8 @@
   border-radius: 20rpx;
   color: white;
   font-size: 30rpx;
-    /* display: flex;   */
+     /* display: flex;    */
   justify-content: center;
-  /* display: none; */
 }
 
 .settler-text {
@@ -134,9 +133,173 @@
     border-radius: 10rpx;
 }
 
-/* <view class='bottom-tool-content'>
-    <image class='input-tip' src='./../../../images/shopping-cart@3x.png'></image>
-        <textarea class='input-view' placeholder='请手动输入商品条码'></textarea>
-        
-        <view class='query-button main-color'>查找</view>
-    </view> */
+
+
+/*--------------  */
+
+/*mask*/
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+/*content*/
+.drawer_box {
+  width: 80%;
+  overflow: hidden;
+   position: fixed; 
+  max-height: 80%;
+  top: 60%;
+  left: 10%;
+  z-index: 1001;
+  background: #FAFAFA;
+  margin: -200px 0 0 0;
+  border-radius: 3px;
+}
+
+.drawer_title{
+  margin:15px 15px 0 15px;
+  font: 18px;
+  word-break: break-all;
+   text-align: center; 
+  color: rgb(254, 98, 84);
+}
+.price{
+  margin:15px 15px 0 15px;
+  font: 16px;
+  word-break: break-all;
+   text-align: center; 
+  color: black; 
+}
+
+
+.btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+
+.btn-box image {
+  width: 23px;
+  height: 23px;
+  border: 0;
+  margin: 0;
+}
+.buy-count{
+  margin: 0 15px;
+
+}
+
+.fuc-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 60rpx;
+  font-size: 26rpx;
+  margin-bottom: 40rpx;
+}
+
+.btn-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   border: 1px solid #E8E8EA; 
+  border-color: rgb(222, 222, 222);
+  border-radius: 3px;
+  margin: 10rpx;
+  width: 80px;
+  height: 28px;
+}
+.btn-add-cart {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(15, 193, 161);
+  margin: 10rpx;
+    width: 80px;
+  height: 30px;
+  color: white;
+}
+.btn-add-cart-scan {
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(15, 193, 161);
+  margin: 10rpx;
+    width: 80px;
+  height: 30px;
+  color: white;
+}
+
+
+
+.drawer_content {
+  height: 210px;
+  overflow-y: scroll; /*超出父盒子高度可滚动*/
+}
+
+.btn_ok{
+  padding: 10px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+  border-top: 1px solid #E8E8EA;
+  color: #3CC51F;
+}
+
+.top{
+	padding-top:8px;
+}
+.bottom {
+	padding-bottom:8px;
+}
+.title {
+	height: 30px;
+	line-height: 30px;
+	width: 160rpx;
+	text-align: center;
+	display: inline-block;
+	font: 300 28rpx/30px "microsoft yahei";
+}
+
+.input_base {
+	border: 2rpx solid #ccc;
+	padding-left: 10rpx;
+	margin-right: 50rpx;
+}
+.input_h30{
+	height: 30px;
+	line-height: 30px;
+}
+.input_h60{
+	height: 60px;
+}
+.input_view{
+	font: 12px "microsoft yahei";
+	background: #fff;
+	color:#000;
+	line-height: 30px;
+}
+
+input {
+	font: 12px "microsoft yahei";
+	background: #fff;
+	color:#000 ;
+}
+radio{
+	margin-right: 20px;
+}
+.grid { display: -webkit-box; display: box; }
+.col-0 {-webkit-box-flex:0;box-flex:0;}
+.col-1 {-webkit-box-flex:1;box-flex:1;}
+.fl { float: left;}
+.fr { float: right;}

@@ -7,26 +7,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    cartCount: 2,
+    cartCount: 1,
     money: 30,
     currentCode: '6914973604292',
     inputValue: '',
+    showModalStatus: false,
+scanGoodsInfo:{},
+willBuyCount: 1,
   },
 
 
   onTapScan: function (e) {
     var that = this;
     //模拟器直接 请求条形码商品
-    // that.requestGoodsInfo(function (data) {
-    //   if (Object.keys(data).length == 0) { 
-    //         console.log('data 数据', 11111111);
-    //        }else{
+    that.requestGoodsInfo(function (data) {
+      //有商品
+      if (Object.keys(data).length > 0) {
 
-    //         console.log('data 数据', 11112222);
-    //        }
+        that.setData({
+          scanGoodsInfo: data
+        })
 
-    // });
-    // return;
+        // wx.showToast({
+        //   title: JSON.stringify(data),
+        // })
+        that.runAnimation('open');
+      }
+
+    });
+    return;
 
 
     // 只允许从相机扫码
@@ -42,9 +51,15 @@ Page({
         that.requestGoodsInfo(function (data) {
           //有商品
           if (Object.keys(data).length > 0) {
-            wx.showToast({
-              title: JSON.stringify(data),
+
+            that.setData({
+              scanGoodsInfo: data
             })
+
+            // wx.showToast({
+            //   title: JSON.stringify(data),
+            // })
+            that.runAnimation('open');
           }
         });
 
@@ -58,9 +73,11 @@ Page({
 
   onTapCart: function (e) {
 
-    wx.navigateTo({
-      url: '../cart/cart',
-    })
+    // wx.navigateTo({
+    //   url: '../cart/cart',
+    // })
+
+    this.runAnimation('open');
   },
 
 
@@ -78,12 +95,19 @@ Page({
       currentCode: this.data.inputValue,
     })
 
+var that = this;
     this.requestGoodsInfo(function (data) {
       //有商品
       if (Object.keys(data).length > 0) {
-        wx.showToast({
-          title: JSON.stringify(data),
+
+        that.setData({
+          scanGoodsInfo: data
         })
+
+        // wx.showToast({
+        //   title: JSON.stringify(data),
+        // })
+        that.runAnimation('open');
       }
     });
   },
@@ -193,5 +217,104 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+
+onTapCancelAdd:function(e){
+
+  this.runAnimation('close');
+
+},
+
+
+  onAddCount: function (e) {
+    if (this.data.willBuyCount >= 10000) {
+
+      return;
+    }
+
+    var tcount = this.data.willBuyCount;
+    this.setData({
+      willBuyCount: tcount + 1
+    });
+
+},
+  onDelCount: function (e) {
+
+    if (this.data.willBuyCount <= 1){
+
+      return;
+    }
+
+    var tcount = this.data.willBuyCount;
+    this.setData({
+      willBuyCount: tcount-1
+    });
+
+},
+
+
+  onTapAddCart:function(e){
+    this.runAnimation('close');
+
+  },
+
+  onTapAddCartScan:function(e){
+    this.runAnimation('close');
+    this.onTapScan();
+  },
+
+  powerDrawer: function (e) {
+    var currentStatu = "open";
+    this.runAnimation(currentStatu)
+  },
+
+  runAnimation: function (currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例 
+    var animation = wx.createAnimation({
+      duration: 200,  //动画时长
+      timingFunction: "linear", //线性
+      delay: 0  //0则不延迟
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例
+    this.animation = animation;
+
+    // 第3步：执行第一组动画
+    animation.opacity(0).rotateX(-200).step();
+
+    // 第4步：导出动画对象赋给数据对象储存
+    this.setData({
+      animationData: animation.export()
+    })
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function () {
+      // 执行第二组动画
+      animation.opacity(1).rotateX(0).step();
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
+      this.setData({
+        animationData: animation
+      })
+
+      //关闭
+      if (currentStatu == "close") {
+        this.setData(
+          {
+            showModalStatus: false
+          }
+        );
+      }
+    }.bind(this), 200)
+
+    // 显示
+    if (currentStatu == "open") {
+      this.setData(
+        {
+          showModalStatus: true
+        }
+      );
+    }
   }
 })
