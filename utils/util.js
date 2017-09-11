@@ -16,6 +16,26 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+//判断对象是否为空
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+function isEmpty(obj) {
+  // 本身为空直接返回true
+  if (obj == null) return true;
+
+  // 然后可以根据长度判断，在低版本的ie浏览器中无法这样判断。
+  if (obj.length > 0) return false;
+  if (obj.length === 0) return true;
+
+  //最后通过属性长度判断。
+  for (var key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false;
+  }
+
+  return true;
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  isEmpty:isEmpty
 }

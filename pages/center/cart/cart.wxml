@@ -1,2 +1,87 @@
 <!--pages/center/Cart/cart.wxml-->
-<text>{{page}}.wxml</text>
+<!--要是够车内没有数据，就行显示没有数据-->
+<view class='all-content'>
+  <view class="cart" hidden="{{45645}}">
+    <image src="./../../../images/null-cart.png" />
+    <view>购物车什么都没有，赶快去购物吧</view>
+  </view>
+  <!--要是有数据，就显示数据-->
+  <view class="cartList" hidden="{{!iscart}}">
+    <!--header-->
+    <!-- <view class="baoyou"></view> -->
+    <!--list item-->
+    <block wx:for="{{cartList}}">
+      <view class="goods {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+
+        <view class="content">
+          <!--文字说明-->
+          <!-- <view class="goods-navigator">
+            <text class="good-name">{{item.goodsInfo.goodsName}}</text>
+          </view> -->
+          <text class="goods-name">{{item.goodsInfo.goodsName}}</text>
+          <text class="goods-price">￥{{item.goodsInfo.price}}</text>
+
+          <view class="goods-btn-box">
+            <image class="del-btn" src='./../../../images/btn-reduce@3x.png' bindtap="onTapCellDelCount" data-index="{{index}}">-
+            </image>
+            <view class='buy-count' data-index="{{index}}">{{item.goodsInfo.count}}</view>
+            <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onTapCellAddCount" data-index="{{index}}">-
+            </image>
+
+          </view>
+
+          <view class="xiaoji-text">小计：
+            <text>￥{{item.goodsInfo.total}}</text>
+          </view>
+
+        </view>
+        <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
+      </view>
+    </block>
+
+  </view>
+
+  <!--footer-->
+  <view class="total">
+    <image class='total_scan' src='./../../../images/btn-scan@3x.png' bindtap='onTapScan'></image>
+    <view class="total_text">合计：
+      <text>￥{{moneyStr}}</text>
+    </view>
+    <view class="total_coupon_text">促销优惠：
+      <text>￥{{0}}</text>
+    </view>
+    <view class="total_js main-color" size="mini">去结算({{cartCount}})</view>
+  </view>
+
+
+</view>
+
+
+
+
+<!--mask-->
+<view class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+
+  <!--drawer content-->
+  <view class="drawer_title">{{scanGoodsInfo.goodsName}}</view>
+  <view class="price">￥{{scanGoodsInfo.price}}</view>
+  <view class="btn-box">
+    <image class="del-btn" src='./../../../images/btn-reduce@3x.png' bindtap="onDelCount">-
+    </image>
+    <view class='buy-count'>{{willBuyCount}}</view>
+    <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onAddCount">-
+    </image>
+
+  </view>
+
+  <view class="fuc-box">
+    <view class="btn-cancel" bindtap="onTapCancelAdd">取消</view>
+    <view class="btn-add-cart" bindtap="onTapAddCart">加入购物车</view>
+    <view class="btn-add-cart-scan" bindtap="onTapAddCartScan">加入并扫码</view>
+
+
+  </view>
+</view>

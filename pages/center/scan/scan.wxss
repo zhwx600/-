@@ -59,7 +59,7 @@
 .cart-content image {
     width: 120rpx;
     height: 120rpx;
-    margin-right: 15rpx;
+    margin-right: 10rpx;
 }
 
 .cart-goods-count{
@@ -73,15 +73,17 @@
   /* padding: 10rpx; */
   background-color: red;
   border-radius: 20rpx;
+   padding: 0rpx 6rpx; 
   color: white;
-  font-size: 30rpx;
+  font-size: 26rpx;
      /* display: flex;    */
   justify-content: center;
+  align-items: center;
 }
 
 .settler-text {
     padding: 15rpx 15rpx;
-    margin-left: 15rpx;
+    margin-left: 10rpx;
     background-color: #0fc1a1;
     color: white;
     border-radius: 10rpx;
@@ -241,65 +243,3 @@
   color: white;
 }
 
-
-
-.drawer_content {
-  height: 210px;
-  overflow-y: scroll; /*超出父盒子高度可滚动*/
-}
-
-.btn_ok{
-  padding: 10px;
-  font: 20px "microsoft yahei";
-  text-align: center;
-  border-top: 1px solid #E8E8EA;
-  color: #3CC51F;
-}
-
-.top{
-	padding-top:8px;
-}
-.bottom {
-	padding-bottom:8px;
-}
-.title {
-	height: 30px;
-	line-height: 30px;
-	width: 160rpx;
-	text-align: center;
-	display: inline-block;
-	font: 300 28rpx/30px "microsoft yahei";
-}
-
-.input_base {
-	border: 2rpx solid #ccc;
-	padding-left: 10rpx;
-	margin-right: 50rpx;
-}
-.input_h30{
-	height: 30px;
-	line-height: 30px;
-}
-.input_h60{
-	height: 60px;
-}
-.input_view{
-	font: 12px "microsoft yahei";
-	background: #fff;
-	color:#000;
-	line-height: 30px;
-}
-
-input {
-	font: 12px "microsoft yahei";
-	background: #fff;
-	color:#000 ;
-}
-radio{
-	margin-right: 20px;
-}
-.grid { display: -webkit-box; display: box; }
-.col-0 {-webkit-box-flex:0;box-flex:0;}
-.col-1 {-webkit-box-flex:1;box-flex:1;}
-.fl { float: left;}
-.fr { float: right;}
