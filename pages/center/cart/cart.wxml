@@ -8,17 +8,11 @@
   <!-- <view class='clearContent main-color'></view> -->
   <!--要是有数据，就显示数据-->
   <view class="cartList" hidden="{{!iscart}}">
-    <!--header-->
-    <!-- <view class="baoyou"></view> -->
     <!--list item-->
     <block wx:for="{{cartList}}">
       <view class="goods {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
- <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
+        <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
         <view class="content">
-          <!--文字说明-->
-          <!-- <view class="goods-navigator">
-            <text class="good-name">{{item.goodsInfo.goodsName}}</text>
-          </view> -->
           <text class="goods-name">{{item.goodsInfo.goodsName}}</text>
           <text class="goods-price">￥{{item.goodsInfo.price}}</text>
 
@@ -36,10 +30,8 @@
           </view>
 
         </view>
-       
       </view>
     </block>
-
   </view>
 
   <!--footer-->
@@ -51,17 +43,15 @@
     <view class="total_coupon_text">促销优惠：
       <text>￥{{0}}</text>
     </view>
-    <view class="total_js main-color" size="mini">去结算({{cartCount}})</view>
+    <view class="total_js main-color" bindtap='onTapSettler'>去结算({{cartCount}})</view>
   </view>
-
-
 </view>
 
 
 
 
 <!--mask-->
-<view class="drawer_screen" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<view class="drawer_screen" wx:if="{{showModalStatus}}"></view>
 <!--content-->
 <!--使用animation属性指定需要执行的动画-->
 <view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
@@ -75,14 +65,57 @@
     <view class='buy-count'>{{willBuyCount}}</view>
     <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onAddCount">-
     </image>
-
   </view>
 
   <view class="fuc-box">
     <view class="btn-cancel" bindtap="onTapCancelAdd">取消</view>
     <view class="btn-add-cart" bindtap="onTapAddCart">加入购物车</view>
     <view class="btn-add-cart-scan" bindtap="onTapAddCartScan">加入并扫码</view>
+  </view>
+</view>
 
 
+<!--mask-->
+<view class="bag-screen" wx:if="{{showBagStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="bag-box" wx:if="{{showBagStatus}}">
+
+  <!--drawer content-->
+  <view class="bag-title">请选择购物袋</view>
+  <view class="bag-tip">购买后到专属出口装袋台领取</view>
+  <view class="bag-type-box">
+    <view class='bag-type-box-xiao' data-index="0" bindtap="onTapBagSelect"  wx:if="{{bagList.length>=1}}">
+      <image class="bag-image" src="{{bagList[0].img}}" >-
+      </image>
+      <text style='color:{{bagList[0].color}}'>{{bagList[0].goodsName}}</text>
+      <text style='color:{{bagList[0].color}}' class='bag-price'>￥{{bagList[0].price}}</text>
+    </view>
+    <view class='bag-type-box-zhong' data-index="1" bindtap="onTapBagSelect"  wx:if="{{bagList.length>=2}}">
+      <image class="bag-image" src="{{bagList[1].img}}">-
+      </image>
+      <text style='color:{{bagList[1].color}}'>{{bagList[1].goodsName}}</text>
+      <text style='color:{{bagList[1].color}}' class='bag-price'>￥{{bagList[1].price}}</text>
+    </view>
+    <view class='bag-type-box-da' data-index="2" bindtap="onTapBagSelect"  wx:if="{{bagList.length>=3}}">
+      <image class="bag-image" src="{{bagList[2].img}}">-
+      </image>
+      <text style='color:{{bagList[2].color}}'>{{bagList[2].goodsName}}</text>
+      <text style='color:{{bagList[2].color}}' class='bag-price'>￥{{bagList[2].price}}</text>
+    </view>
+
+  </view>
+
+  <view class="bag-btn-box">
+    <image class="del-btn" src='./../../../images/btn-reduce@3x.png' bindtap="onBagDelCount">-
+    </image>
+    <view class='buy-count'>{{willBagBuyCount}}</view>
+    <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onBagAddCount">-
+    </image>
+  </view>
+
+  <view class="bag-fuc-box">
+    <view class="bag-btn-cancel" bindtap="onTapCancelBag">不需要</view>
+    <view class="bag-btn-sure" bindtap="onTapSureBag">确定</view>
   </view>
 </view>

@@ -7,6 +7,7 @@ var api = {
   cartList: apiRoot + '/goodsCar/getGoodsCarInfo',
   addCart: apiRoot + '/goodsCar/addGoodsCar',
   delCart: apiRoot + '/goodsCar/delGoodsCarInfo',
+  bagInfo: apiRoot + '/shoppingBig/getShoppingBagInfo',
 };
 
 

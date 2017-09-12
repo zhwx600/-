@@ -151,15 +151,15 @@ Page({
   onTapCart: function (e) {
 
     console.log("cart tap", e)
-    // wx.navigateTo({
-    //   url: '../cart/cart',
-    // })
+    wx.navigateTo({
+      url: '../cart/cart',
+    })
     // wx.navigateTo({
     //   url: '../leftswipe/leftswipe',
     // })
-    wx.navigateTo({
-      url: '../left/left',
-    })
+    // wx.navigateTo({
+    //   url: '../left/left',
+    // })
 
   },
 

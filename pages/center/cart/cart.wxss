@@ -312,3 +312,184 @@ page {
   height: 30px;
   color: white;
 }
+
+/* ****************************购物袋选择 ***************************/
+
+.bag-screen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  background: #000;
+  opacity: 0.5;
+}
+
+.bag-box {
+  width: 80%;
+  position: fixed;
+  height: 310px;
+  top: 50%;
+  left: 10%;
+  z-index: 1001;
+  background-color: white;
+  margin: -200px 0 0 0;
+  border-radius: 3px;
+}
+
+.bag-title {
+  margin: 15px 15px 0 15px;
+  font: 16px;
+  word-break: break-all;
+  text-align: center;
+  color: rgb(51, 51, 51);
+}
+
+.bag-tip {
+  margin: 15px 15px 0 15px;
+  font-size: 13px;
+  word-break: break-all;
+  text-align: center;
+  color: #0fc1a1;
+}
+
+.bag-type-box {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 30px;
+}
+
+.bag-type-box-xiao {
+  display: flex;
+  flex-direction: column;
+   align-items: center; 
+  font-size: 12px;
+  margin-right: 20px;
+}
+
+.bag-price{
+  font:bold;
+  font-size: 15px;
+}
+
+.bag-type-box-xiao image {
+  width: 17px;
+  height: 20px;
+  border: 0;
+  margin: 0;
+}
+
+.bag-type-box-zhong {
+  display: flex;
+  flex-direction: column;
+   align-items: center; 
+  font-size: 12px;
+  margin-right: 20px;
+}
+
+.bag-type-box-zhong image {
+  width: 20px;
+  height: 25px;
+  border: 0;
+  margin: 0;
+}
+
+.bag-type-box-da {
+  display: flex;
+  flex-direction: column;
+   align-items: center; 
+  font-size: 12px;
+}
+
+.bag-type-box-da image {
+  width: 25px;
+  height: 30px;
+  border: 0;
+  margin: 0;
+}
+
+.bag-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 50rpx;
+}
+
+.bag-btn-box image {
+  width: 23px;
+  height: 23px;
+  border: 0;
+  margin: 0;
+}
+
+.bag-fuc-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 60rpx;
+  font-size: 26rpx;
+  margin-bottom: 40rpx;
+}
+
+.bag-btn-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e8e8ea;
+  border-color: rgb(222, 222, 222);
+  border-radius: 3px;
+  margin: 10rpx -10rpx 10rpx 10rpx;
+  width: 90px;
+  height: 29px;
+}
+
+.bag-btn-sure {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(15, 193, 161);
+  margin: 10rpx 10rpx 10rpx -10rpx;
+  width: 90px;
+  height: 30px;
+  color: white;
+}
+
+/* <!--mask-->
+<view class="bag-screen" wx:if="{{showBagStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="bag-box" wx:if="{{showBagStatus}}">
+
+  <!--drawer content-->
+  <view class="bag_title">请选择购物袋</view>
+  <view class="bag_tip main-color">购买后到专属出口装袋台领取</view>
+  <view class="bag-type-box">
+    <view class='bag-type-box-xiao'>
+      <image class="bag-image" src='./../../../images/icon-shopping-bags11@3x.png' bindtap="onDelCount">-
+      </image>
+      <text>小号购物袋</text>
+      <text>￥0.2</text>
+    </view>
+    <view class='bag-type-box-zhong'>
+      <image class="bag-image" src='./../../../images/icon-shopping-bags11@3x.png' bindtap="onDelCount">-
+      </image>
+      <text>中号购物袋</text>
+      <text>￥0.4</text>
+    </view>
+    <view class='bag-type-box-da'>
+      <image class="bag-image" src='./../../../images/icon-shopping-bags11@3x.png' bindtap="onDelCount">-
+      </image>
+      <text>大号购物袋</text>
+      <text>￥0.6</text>
+    </view>
+
+  </view>
+
+  <view class="fuc-box">
+    <view class="bag-btn-cancel" bindtap="onTapCancelBag">不需要</view>
+    <view class="bag-btn-sure" bindtap="onTapSureBag">确定</view>
+  </view>
+</view> */

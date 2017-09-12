@@ -2,9 +2,9 @@
   "pages": [
     "pages/center/chome/chome",
     "pages/center/scan/scan",
-    "pages/center/logs/logs",
     "pages/center/cart/cart",
     "pages/center/leftswipe/leftswipe",
+    "pages/center/logs/logs",
     "pages/center/left/left"
   ],
   "window": {

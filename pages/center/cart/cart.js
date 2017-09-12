@@ -13,13 +13,17 @@ Page({
     moneyStr: '0',
     currentCode: '',
     showModalStatus: false,
+    showBagStatus: false,
     editGoodsInfo: {},
     scanGoodsInfo: {},
     willBuyCount: 1,
+    willBagBuyCount:1,
     cartList: [],
     iscart: false,
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    bagList:[],
+
   },
   // onPullDownRefresh: function () {
   //   wx.stopPullDownRefresh()
@@ -60,15 +64,15 @@ Page({
         data[i].goodsInfo.total = (data[i].goodsInfo.price * data[i].goodsInfo.count).toFixed(2);
       }
 
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
-      // data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
+      data.push(data[0]);
 
       var list = [];
       console.log('haha', tCount);
@@ -189,6 +193,53 @@ Page({
 
   },
 
+  onTapSettler:function(e){
+var that = this;
+    this.requestBagInfo(function (data) {
+      wx.hideLoading();
+      console.log('bag info', data);
+      //删除其中一个 购物袋 做测试用
+      // data.shoppingBagInfo.splice(2, 1)
+      for (var i in data.shoppingBagInfo) {
+        if(i == 0){
+          data.shoppingBagInfo[i].isselect = true;
+          data.shoppingBagInfo[i].color = '#0fc1a1';
+        }else{
+          data.shoppingBagInfo[i].isselect = false;
+          data.shoppingBagInfo[i].color = 'black';
+        }
+
+        
+
+        if(i == 0){
+          data.shoppingBagInfo[i].img = './../../../images/icon-shopping-bags1@3x.png';
+        } else if (i == 1) {
+          data.shoppingBagInfo[i].img = './../../../images/icon-shopping-bags22@3x.png';
+        } else if (i == 2) {
+          data.shoppingBagInfo[i].img = './../../../images/icon-shopping-bags33@3x.png';
+        }
+
+      }
+
+      that.setData({
+        bagList: data.shoppingBagInfo,
+        // money: tMoney,
+        // moneyStr: tMoney.toFixed(2),
+        // cartList: data,
+        // iscart: data.length > 0 ? true : false,
+      });
+
+      if (data.shoppingBagInfo.length > 0){
+        that.runBagAnimation('open');
+
+      }else{
+        
+      }
+
+    });
+
+    
+  },
 
   /*------------ */
 
@@ -599,28 +650,13 @@ Page({
   onTapCellDelCount: function (e) {
     console.log(e)
     //
-    var index = e.target.dataset.index;
+    var index = e.currentTarget.dataset.index;
     var list = this.data.cartList;  
     var eGoods = list[index];
     console.log("del count",eGoods);
     if (eGoods.goodsInfo.count <= 1){
       return;
     }
-
-
-    wx.showModal({
-      title: '',
-      content: "确定删除此商品？",
-      showCancel: true,
-      success: function (res) {
-        if (res.confirm) {
-          // wx.switchTab({
-          //   url: "/pages/index/index"
-          // });
-        }
-      }
-    });
-
 
     this.data.editGoodsInfo = eGoods;
     this.data.editGoodsInfo.goodsInfo.count = eGoods.goodsInfo.count - 1;
@@ -656,10 +692,10 @@ Page({
   onTapCellAddCount: function (e) {
     console.log(e)
     //
-    var index = e.target.dataset.index;
+    var index = e.currentTarget.dataset.index;
     var list = this.data.cartList;
     var eGoods = list[index];
-    console.log("del count", eGoods);
+    console.log("del count","index",index, eGoods);
     if (eGoods.goodsInfo.count >= 10000) {
       return;
     }
@@ -698,7 +734,7 @@ Page({
 
     console.log(e)
     //
-    var index = e.target.dataset.index;
+    var index = e.currentTarget.dataset.index;
     var list = this.data.cartList;
     var eGoods = list[index];
 
@@ -745,7 +781,185 @@ Page({
     });
 
     
-  }
+  },
+
+
+
+// 购物车选择页面
+
+  onTapBagSelect: function (e) {
+    
+    var index = e.currentTarget.dataset.index;
+console.log('index',index,e);
+    for (var i in this.data.bagList) {
+      if (i == index) {
+        this.data.bagList[i].isselect = true;
+
+        if (i == 0) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags1@3x.png';
+        } else if (i == 1) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags2@3x.png';
+        } else if (i == 2) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags3@3x.png';
+        }
+        this.data.bagList[i].color = '#0fc1a1';
+
+      } else {
+        this.data.bagList[i].isselect = false;
+        this.data.bagList[i].color = 'black';
+
+        if (i == 0) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags11@3x.png';
+        } else if (i == 1) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags22@3x.png';
+        } else if (i == 2) {
+          this.data.bagList[i].img = './../../../images/icon-shopping-bags33@3x.png';
+        }
+      }
+
+    }
+    console.log('bagList', this.data.bagList);
+
+    var that = this;
+    this.setData({
+      bagList: that.data.bagList,
+      // money: tMoney,
+      // moneyStr: tMoney.toFixed(2),
+      // cartList: data,
+      // iscart: data.length > 0 ? true : false,
+    });
+
+  },
+
+
+  onBagAddCount: function (e) {
+    if (this.data.willBagBuyCount >= 10000) {
+
+      return;
+    }
+
+    var tcount = this.data.willBagBuyCount;
+    this.setData({
+      willBagBuyCount: tcount + 1
+    });
+
+  },
+  onBagDelCount: function (e) {
+
+    if (this.data.willBagBuyCount <= 1) {
+
+      return;
+    }
+
+    var tcount = this.data.willBagBuyCount;
+    this.setData({
+      willBagBuyCount: tcount - 1
+    });
+
+  },
+
+
+  onTapSureBag:function(e){
+    this.runBagAnimation('close');
+  },
+  onTapCancelBag: function (e) {
+    this.runBagAnimation('close');
+  },
+
+
+
+  runBagAnimation: function (currentStatu) {
+    /* 动画部分 */
+    // 第1步：创建动画实例 
+    var animation = wx.createAnimation({
+      duration: 300,  //动画时长
+      timingFunction: "linear", //线性
+      delay: 0  //0则不延迟
+    });
+
+    // 第2步：这个动画实例赋给当前的动画实例
+    this.animation = animation;
+
+    // 第3步：执行第一组动画
+    animation.opacity(0).rotateX(-200).step();
+
+    // 第4步：导出动画对象赋给数据对象储存
+    this.setData({
+      animationData: animation.export()
+    })
+
+    // 第5步：设置定时器到指定时候后，执行第二组动画
+    setTimeout(function () {
+      // 执行第二组动画
+      animation.opacity(1).rotateX(0).step();
+      // 给数据对象储存的第一组动画，更替为执行完第二组动画的动画对象
+      this.setData({
+        animationData: animation
+      })
+
+      //关闭
+      if (currentStatu == "close") {
+        this.setData(
+          {
+            showBagStatus: false
+          }
+        );
+      }
+    }.bind(this), 300)
+
+    // 显示
+    if (currentStatu == "open") {
+      this.setData(
+        {
+          showBagStatus: true
+        }
+      );
+    }
+  },
+
+
+  requestBagInfo: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.bagInfo;
+    api.requestGet({
+      url: tUrl,
+      data: {
+        shopId: getApp().globalData.shopId,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(res.data)
+
+          if (Object.keys(res.data).length == 0) {
+            wx.showToast({
+              title: '获取购物袋失败',
+            })
+          }
+
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb()
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb()
+        }
+
+      }
+    });
+
+  },
+
 })
 
 
