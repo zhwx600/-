@@ -607,6 +607,21 @@ Page({
       return;
     }
 
+
+    wx.showModal({
+      title: '',
+      content: "确定删除此商品？",
+      showCancel: true,
+      success: function (res) {
+        if (res.confirm) {
+          // wx.switchTab({
+          //   url: "/pages/index/index"
+          // });
+        }
+      }
+    });
+
+
     this.data.editGoodsInfo = eGoods;
     this.data.editGoodsInfo.goodsInfo.count = eGoods.goodsInfo.count - 1;
 
@@ -636,24 +651,6 @@ Page({
       }
     });
 
-    // // 商品总数量-1
-    // this.data.goodsCount -= 1;
-    // // 总价钱 减去 对应项的价钱单价
-    // this.data.total -= Number(this.data.cart[e.target.id.substring(3)].price);
-    // // 购物车主体数据对应的项的数量-1  并赋给主体数据对应的项内
-    // this.data.cart[e.target.id.substring(3)].count = --this.data.cart[e.target.id.substring(3)].count;
-    // // 更新data数据对象
-    // this.setData({
-    //   cart: this.data.cart,
-    //   total: this.data.total,
-    //   goodsCount: this.data.goodsCount
-    // })
-    // // 主体数据重新赋入缓存内
-    // try {
-    //   wx.setStorageSync('cart', this.data.cart)
-    // } catch (e) {
-    //   console.log(e)
-    // }
   },
   /* 加数 */
   onTapCellAddCount: function (e) {
@@ -708,35 +705,46 @@ Page({
     if (eGoods.count <= 1) {
       return;
     }
-
-    this.data.editGoodsInfo = eGoods;
-
     var that = this;
-    this.requestDeleteCartGoods(function (success) {
-      //有商品
-      if (success) {
-        console.log('tdata', success);
+    wx.showModal({
+      title: '',
+      content: "确定删除此商品？",
+      showCancel: true,
+      success: function (res) {
+        if (res.confirm) {
 
-        eGoods.goodsInfo.count = that.data.editGoodsInfo.goodsInfo.count;
+          that.data.editGoodsInfo = eGoods;
 
-        list.splice(index, 1);
-        var tCount = 0;
-        var tMoney = 0;
-        for (var i in list) {
-          tCount += list[i].goodsInfo.count;
-          tMoney += list[i].goodsInfo.price * list[i].goodsInfo.count;
-          list[i].goodsInfo.total = (list[i].goodsInfo.price * list[i].goodsInfo.count).toFixed(2);
+          that.requestDeleteCartGoods(function (success) {
+            //有商品
+            if (success) {
+              console.log('tdata', success);
+
+              eGoods.goodsInfo.count = that.data.editGoodsInfo.goodsInfo.count;
+
+              list.splice(index, 1);
+              var tCount = 0;
+              var tMoney = 0;
+              for (var i in list) {
+                tCount += list[i].goodsInfo.count;
+                tMoney += list[i].goodsInfo.price * list[i].goodsInfo.count;
+                list[i].goodsInfo.total = (list[i].goodsInfo.price * list[i].goodsInfo.count).toFixed(2);
+              }
+              console.log('money = ', tMoney);
+              that.setData({
+                cartCount: tCount,
+                money: tMoney,
+                moneyStr: tMoney.toFixed(2),
+                cartList: list,
+                iscart: list.length > 0 ? true : false,
+              });
+            }
+          });
         }
-        console.log('money = ', tMoney);
-        that.setData({
-          cartCount: tCount,
-          money: tMoney,
-          moneyStr: tMoney.toFixed(2),
-          cartList: list,
-          iscart: list.length > 0 ? true : false,
-        });
       }
     });
+
+    
   }
 })
 

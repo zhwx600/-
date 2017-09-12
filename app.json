@@ -4,7 +4,8 @@
     "pages/center/scan/scan",
     "pages/center/logs/logs",
     "pages/center/cart/cart",
-    "pages/center/leftswipe/leftswipe"
+    "pages/center/leftswipe/leftswipe",
+    "pages/center/left/left"
   ],
   "window": {
     "backgroundTextStyle": "light",

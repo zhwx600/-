@@ -1,10 +1,11 @@
 <!--pages/center/Cart/cart.wxml-->
 <!--要是够车内没有数据，就行显示没有数据-->
 <view class='all-content'>
-  <view class="cart" hidden="{{45645}}">
+  <view class="cart" hidden="{{iscart}}">
     <image src="./../../../images/null-cart.png" />
     <view>购物车什么都没有，赶快去购物吧</view>
   </view>
+  <!-- <view class='clearContent main-color'></view> -->
   <!--要是有数据，就显示数据-->
   <view class="cartList" hidden="{{!iscart}}">
     <!--header-->
@@ -12,7 +13,7 @@
     <!--list item-->
     <block wx:for="{{cartList}}">
       <view class="goods {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-
+ <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
         <view class="content">
           <!--文字说明-->
           <!-- <view class="goods-navigator">
@@ -35,7 +36,7 @@
           </view>
 
         </view>
-        <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
+       
       </view>
     </block>
 
