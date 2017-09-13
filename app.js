@@ -165,6 +165,7 @@ App({
     nuserInfo: {
     },
     shopId:'5992b8825a8e730418638009',//湖里沃尔玛
+    shopName: '湖里沃尔玛',//湖里沃尔玛
     firstPage: null,
   },
 

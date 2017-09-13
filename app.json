@@ -5,7 +5,8 @@
     "pages/center/cart/cart",
     "pages/center/leftswipe/leftswipe",
     "pages/center/logs/logs",
-    "pages/center/left/left"
+    "pages/center/left/left",
+    "pages/center/settle/settle"
   ],
   "window": {
     "backgroundTextStyle": "light",

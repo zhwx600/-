@@ -17,12 +17,12 @@ Page({
     editGoodsInfo: {},
     scanGoodsInfo: {},
     willBuyCount: 1,
-    willBagBuyCount:1,
+    willBagBuyCount: 1,
     cartList: [],
     iscart: false,
     startX: 0, //开始坐标
     startY: 0,
-    bagList:[],
+    bagList: [],
 
   },
   // onPullDownRefresh: function () {
@@ -64,15 +64,15 @@ Page({
         data[i].goodsInfo.total = (data[i].goodsInfo.price * data[i].goodsInfo.count).toFixed(2);
       }
 
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
-      data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
+      // data.push(data[0]);
 
       var list = [];
       console.log('haha', tCount);
@@ -175,7 +175,8 @@ Page({
           if (Object.keys(data).length > 0) {
 
             that.setData({
-              scanGoodsInfo: data
+              scanGoodsInfo: data,
+              willBuyCount: 1,
             })
 
             // wx.showToast({
@@ -193,25 +194,25 @@ Page({
 
   },
 
-  onTapSettler:function(e){
-var that = this;
+  onTapSettler: function (e) {
+    var that = this;
     this.requestBagInfo(function (data) {
       wx.hideLoading();
       console.log('bag info', data);
       //删除其中一个 购物袋 做测试用
       // data.shoppingBagInfo.splice(2, 1)
       for (var i in data.shoppingBagInfo) {
-        if(i == 0){
+        if (i == 0) {
           data.shoppingBagInfo[i].isselect = true;
           data.shoppingBagInfo[i].color = '#0fc1a1';
-        }else{
+        } else {
           data.shoppingBagInfo[i].isselect = false;
           data.shoppingBagInfo[i].color = 'black';
         }
 
-        
 
-        if(i == 0){
+
+        if (i == 0) {
           data.shoppingBagInfo[i].img = './../../../images/icon-shopping-bags1@3x.png';
         } else if (i == 1) {
           data.shoppingBagInfo[i].img = './../../../images/icon-shopping-bags22@3x.png';
@@ -223,22 +224,23 @@ var that = this;
 
       that.setData({
         bagList: data.shoppingBagInfo,
+        willBagBuyCount: 1,
         // money: tMoney,
         // moneyStr: tMoney.toFixed(2),
         // cartList: data,
         // iscart: data.length > 0 ? true : false,
       });
 
-      if (data.shoppingBagInfo.length > 0){
+      if (data.shoppingBagInfo.length > 0) {
         that.runBagAnimation('open');
 
-      }else{
-        
+      } else {
+
       }
 
     });
 
-    
+
   },
 
   /*------------ */
@@ -285,7 +287,7 @@ var that = this;
 
   },
 
-//编辑购物车
+  //编辑购物车
   requestAddGoodsToCart: function (cb) {
 
     wx.showLoading({
@@ -307,7 +309,7 @@ var that = this;
           gid: this.data.editGoodsInfo.goodsInfo.gid,
           cid: this.data.editGoodsInfo.goodsInfo.cid,
         },
-        
+
       },
       success: function (res) {
         wx.hideLoading();
@@ -499,14 +501,17 @@ var that = this;
       //有商品
       if (data) {
         console.log('tdata', data);
-        var tcount = that.data.willBuyCount + that.data.cartCount;
-        var tMoney = that.data.scanGoodsInfo.price * that.data.willBuyCount + that.data.money;
-        that.setData({
-          cartCount: tcount,
-          money: tMoney,
-          moneyStr: tMoney.toFixed(2),
-          willBuyCount: 1
-        });
+
+        that.onLoad();
+
+        // var tcount = that.data.willBuyCount + that.data.cartCount;
+        // var tMoney = that.data.scanGoodsInfo.price * that.data.willBuyCount + that.data.money;
+        // that.setData({
+        //   cartCount: tcount,
+        //   money: tMoney,
+        //   moneyStr: tMoney.toFixed(2),
+        //   willBuyCount: 1
+        // });
       }
     });
   },
@@ -517,14 +522,17 @@ var that = this;
     this.requestAddScanGoodsToCart(function (data) {
       //有商品
       if (data) {
-        var tcount = that.data.willBuyCount + that.data.cartCount;
-        var tMoney = that.data.scanGoodsInfo.price * that.data.willBuyCount + that.data.money;
-        that.setData({
-          cartCount: tcount,
-          money: tMoney,
-          moneyStr: tMoney.toFixed(2),
-          willBuyCount: 1
-        });
+        // var tcount = that.data.willBuyCount + that.data.cartCount;
+        // var tMoney = that.data.scanGoodsInfo.price * that.data.willBuyCount + that.data.money;
+        // that.setData({
+        //   cartCount: tcount,
+        //   money: tMoney,
+        //   moneyStr: tMoney.toFixed(2),
+        //   willBuyCount: 1
+        // });
+
+        that.onLoad();
+
         that.onTapScan('open');
       }
     });
@@ -651,10 +659,10 @@ var that = this;
     console.log(e)
     //
     var index = e.currentTarget.dataset.index;
-    var list = this.data.cartList;  
+    var list = this.data.cartList;
     var eGoods = list[index];
-    console.log("del count",eGoods);
-    if (eGoods.goodsInfo.count <= 1){
+    console.log("del count", eGoods);
+    if (eGoods.goodsInfo.count <= 1) {
       return;
     }
 
@@ -676,7 +684,7 @@ var that = this;
           tMoney += list[i].goodsInfo.price * list[i].goodsInfo.count;
           list[i].goodsInfo.total = (list[i].goodsInfo.price * list[i].goodsInfo.count).toFixed(2);
         }
-        console.log('money = ',tMoney);
+        console.log('money = ', tMoney);
         that.setData({
           cartCount: tCount,
           money: tMoney,
@@ -695,7 +703,7 @@ var that = this;
     var index = e.currentTarget.dataset.index;
     var list = this.data.cartList;
     var eGoods = list[index];
-    console.log("del count","index",index, eGoods);
+    console.log("del count", "index", index, eGoods);
     if (eGoods.goodsInfo.count >= 10000) {
       return;
     }
@@ -780,17 +788,17 @@ var that = this;
       }
     });
 
-    
+
   },
 
 
 
-// 购物车选择页面
+  // 购物袋选择页面
 
   onTapBagSelect: function (e) {
-    
+
     var index = e.currentTarget.dataset.index;
-console.log('index',index,e);
+    console.log('index', index, e);
     for (var i in this.data.bagList) {
       if (i == index) {
         this.data.bagList[i].isselect = true;
@@ -819,6 +827,7 @@ console.log('index',index,e);
 
     }
     console.log('bagList', this.data.bagList);
+
 
     var that = this;
     this.setData({
@@ -859,11 +868,69 @@ console.log('index',index,e);
   },
 
 
-  onTapSureBag:function(e){
+  onTapSureBag: function (e) {
     this.runBagAnimation('close');
+
+    var index = 0;
+    for (var i in this.data.bagList) {
+      if (this.data.bagList[i].isselect) {
+        index = i;
+        break;
+      }
+
+    }
+    var tempBag = this.data.bagList[index];
+    tempBag.count = this.data.willBagBuyCount;
+    this.data.editGoodsInfo.goodsInfo = tempBag;
+    console.log('tempBag', tempBag);
+
+    var that = this;
+    this.requestAddGoodsToCart(function (data) {
+      //有商品
+      if (data) {
+
+        wx.showLoading({
+          title: '',
+          mask: true,
+        })
+        that.requestCartListInfo(function (data) {
+          wx.hideLoading();
+          console.log('haha', data);
+          var tCount = 0;
+          var tMoney = 0;
+          for (var i in data) {
+            tCount += data[i].goodsInfo.count;
+            tMoney += data[i].goodsInfo.price * data[i].goodsInfo.count;
+            data[i].goodsInfo.total = (data[i].goodsInfo.price * data[i].goodsInfo.count).toFixed(2);
+          }
+
+          console.log('haha', tCount);
+          that.setData({
+            cartCount: tCount,
+            money: tMoney,
+            moneyStr: tMoney.toFixed(2),
+            cartList: data,
+            iscart: data.length > 0 ? true : false,
+          });
+
+          wx.navigateTo({
+            url: '../settle/settle',
+          })
+
+        });
+
+      }
+    });
+
+
+
   },
   onTapCancelBag: function (e) {
     this.runBagAnimation('close');
+
+    wx.navigateTo({
+      url: '../settle/settle',
+    })
   },
 
 
