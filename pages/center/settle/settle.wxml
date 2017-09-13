@@ -1,2 +1,43 @@
 <!--pages/center/settle/settle.wxml-->
-<text>pages/center/settle/settle.wxml</text>
+<view class='all-content'>
+
+  <view class="cartList">
+    <view class='space-content'></view>
+    <view class='shop-content'>
+      <image class='shop-content-icon' src='./../../../images/icon-shop@3x.png'></image>
+      <text class='shop-content-name'>{{shopName}}</text>
+      <text class='shop-content-count'>共{{cartCount}}件</text>
+    </view>
+    <!--list item-->
+    <block wx:for="{{cartList}}">
+      <view class="goods " data-index="{{index}}">
+        <view class="content">
+          <text class="goods-name">{{item.goodsInfo.goodsName}}</text>
+          <text class="goods-price">￥{{item.goodsInfo.price}}</text>
+          <view class='buy-count' data-index="{{index}}">x{{item.goodsInfo.count}}</view>
+          <view class="xiaoji-text">
+            <text>小计：￥{{item.goodsInfo.total}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='space-content'></view>
+    <view class='coupon-content'>
+      <text class='coupon-content-name'>优惠券</text>
+      <text class='coupon-content-info'>无可用优惠券</text>
+      <image class='coupon-content-icon' src='./../../../images/dd_wl_arrow@3x.png'></image>
+    </view>
+  </view>
+
+  <!--footer-->
+  <view class="total">
+    <view class="total_text">合计：
+      <text>￥{{moneyStr}}</text>
+    </view>
+    <view class="total_coupon_text">促销优惠：
+      <text>￥{{0}}</text>
+    </view>
+    <view class="total_js main-color" bindtap='onTapSettler'>支付</view>
+  </view>
+</view>

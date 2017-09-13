@@ -35,7 +35,12 @@ function isEmpty(obj) {
   return true;
 }
 
+function isContains(str, substr) {
+  return str.indexOf(substr) >= 0;
+}
+
 module.exports = {
   formatTime: formatTime,
-  isEmpty:isEmpty
+  isEmpty:isEmpty,
+  isContains: isContains
 }

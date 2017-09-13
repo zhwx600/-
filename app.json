@@ -4,9 +4,12 @@
     "pages/center/scan/scan",
     "pages/center/cart/cart",
     "pages/center/leftswipe/leftswipe",
-    "pages/center/logs/logs",
     "pages/center/left/left",
-    "pages/center/settle/settle"
+    "pages/center/settle/settle",
+    "pages/center/orderlist/orderlist",
+    "pages/center/orderdetail/orderdetail",
+    "pages/center/ordercheck/ordercheck",
+    "pages/center/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
