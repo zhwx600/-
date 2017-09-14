@@ -20,6 +20,8 @@ App({
       title: "正在登录",
       mask: true,
     });
+
+    var that = this;
     // 登录
     wx.login({
       success: res => {
@@ -28,21 +30,49 @@ App({
 
         if (res.code) {
           var code = res.code;
-          wx.getUserInfo({
-            success: res => {
 
-              console.log('wx info', res.userInfo)
+          // this.getUserOpenId(res.code);
+          //获取 openid uid
+          api.requestGet({
+            url: 'https://api.weixin.qq.com/sns/jscode2session',
+            data: {
+              appid: 'wxe8596cda75f9d411',
+              secret: '4865e1ac0b99c83643c5ce39566c226c',
+              js_code: code
+            },
+            success: function (res) {
+              console.log('openid 成功11', res);
+              that.globalData.openid = res.openid;
+              that.globalData.unionid = res.unionid
 
-              this.loginServer({
-                'username': this.globalData.mUserInfo.uid,
-                'nickname': res.userInfo.nickName,
-                'source': 1,
-                'pic': res.userInfo.avatarUrl,
-                'openid': this.globalData.mUserInfo.openId
-              });
+//获取用户信息用于 登录
+              wx.getUserInfo({
+                success: res => {
 
+                  console.log('wx info', res.userInfo)
+                  that.loginServer({
+                    'username': that.globalData.unionid,
+                    'nickname': res.userInfo.nickName,
+                    'source': 1,
+                    'pic': res.userInfo.avatarUrl,
+                    'openid': that.globalData.openid
+                  });
+
+                }
+              })
+
+            },
+            fail: function (res) {
+              console.log('openid 失败11', res);
+              wx.hideLoading();
+              wx.showModal({
+                title: '',
+                content: '获取openid失败',
+              })
             }
-          })
+          });
+
+          
         }
 
       }
@@ -51,6 +81,31 @@ App({
 
   },
 
+  getUserOpenId: function (rescode) {
+
+
+    var that = this
+    api.requestGet({
+      url: 'https://api.weixin.qq.com/sns/jscode2session',
+
+      data: {
+        appid: 'wxe8596cda75f9d411',
+        secret: '4865e1ac0b99c83643c5ce39566c226c',
+        js_code: rescode
+      },
+      success: function (res) {
+        console.log('openid 成功11', res);
+
+        that.globalData.openid = res.openid;
+        that.globalData.unionid = res.unionid;
+      },
+      fail: function (res) {
+        console.log('openid 失败11', res);
+      }
+    });
+
+
+  },
 
   loginServer: function (object) {
 
@@ -74,9 +129,6 @@ App({
 
           wx.setStorageSync("Authorization", res.data.token);
 
-          // that.globalData.mUserInfo.openid = res.data.openid;
-          // that.globalData.mUserInfo.openId = res.data.openid;
-
           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
           // 所以此处加入 callback 以防止这种情况
           if (this.userInfoReadyCallback) {
@@ -88,12 +140,12 @@ App({
             title: '登录成功',
           })
 
-//重新刷新首页，以便于数据保证正确
+          //重新刷新首页，以便于数据保证正确
           if (that.firstPage == undefined)
             return;
-            wx.redirectTo({
-              url: './pages/center/chome/chome',
-            })
+          wx.redirectTo({
+            url: './pages/center/chome/chome',
+          })
 
         }
 
@@ -157,16 +209,14 @@ App({
   globalData: {
     userInfo: {
     },
-    mUserInfo: {
-      openId: 'o8aKewkcdNx1ei0nWisWRGAYsfmw',
-      uid: 'ojR6bwRzeSRR4zHfcgJKIwwnvrWE',
-
-    },
+    //服务端下发的 用户数据
     nuserInfo: {
     },
-    shopId:'5992b8825a8e730418638009',//湖里沃尔玛
+    shopId: '5992b8825a8e730418638009',//湖里沃尔玛
     shopName: '湖里沃尔玛',//湖里沃尔玛
     firstPage: null,
+    openid: '',
+    unionid: ''
   },
 
 })

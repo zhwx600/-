@@ -9,7 +9,7 @@ var api = {
   delCart: apiRoot + '/goodsCar/delGoodsCarInfo',
   bagInfo: apiRoot + '/shoppingBig/getShoppingBagInfo',
   submitOrder: apiRoot + '/order/createOrder',
-  payInfo: apiRoot + '/order/orderPay',
+  payInfo: apiRoot + '/order/wxAppletPay',
 };
 
 

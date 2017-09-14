@@ -130,7 +130,11 @@ Page({
     var that = this;
     this.requestPayInfo(function (data) {
       if (!util.isEmpty(data)) {
-
+        // data.timestamp = '1505374389';
+        // data.noncestr = '4uRGjzX9NvYlOTUx';
+        // data.package = 'Sign=WXPay';
+        // data.timestamp = '1505374389';
+        // data.sign = 'DAA041B78A3C2FB0632A49BFA3F88FCE';
         that.setData({
           payInfo: data
         })
@@ -146,11 +150,11 @@ handleCallWXPay:function(e){
 
 var tpayInfo = this.data.payInfo;
   wx.requestPayment({
-    timeStamp: tpayInfo.timestamp,
-    nonceStr: tpayInfo.noncestr,
+    timeStamp: tpayInfo.timeStamp,
+    nonceStr: tpayInfo.nonceStr,
     package: tpayInfo.package,
-    signType: 'MD5',
-    paySign: tpayInfo.sign,
+    signType: tpayInfo.signType,
+    paySign: tpayInfo.paySign,
     success: function (e) {
       console.log("success");
       console.log(e);
@@ -169,20 +173,23 @@ wx.showToast({
 });
       if (util.isContains(e.errMsg, "requestPayment:fail") || 
         util.isContains(e.errMsg, "requestPayment:fail cancel")){//支付失败转到待支付订单列表
-        wx.showModal({
-          title: "提示",
-          content: "订单尚未支付",
-          showCancel: false,
-          confirmText: "确认",
-          success: function (res) {
-            if (res.confirm) {
-              wx.redirectTo({
-                url: '../orderdetail/orderdetail',
-              });
-            }
-          }
-        });
-        return;
+        // wx.showModal({
+        //   title: "提示",
+        //   content: "订单尚未支付",
+        //   showCancel: false,
+        //   confirmText: "确认",
+        //   success: function (res) {
+        //     if (res.confirm) {
+        //       wx.redirectTo({
+        //         url: '../orderdetail/orderdetail',
+        //       });
+        //     }
+        //   }
+        // });
+        // return;
+        // wx.showToast({
+        //   title: e.errMsg,
+        // });
 
       //支付成功  
       }else{
@@ -206,6 +213,7 @@ wx.showToast({
       data: {
         shopId: getApp().globalData.shopId,
         oid:this.data.orderId,
+        openid: getApp().globalData.openid,
         payType:2,//微信固定为2
       },
       success: function (res) {
