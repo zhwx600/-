@@ -215,8 +215,8 @@ App({
     shopId: '5992b8825a8e730418638009',//湖里沃尔玛
     shopName: '湖里沃尔玛',//湖里沃尔玛
     firstPage: null,
-    openid: '',
-    unionid: ''
+    openid: '',//保存登录时的openid
+    unionid: ''//保存登录时的unionid
   },
 
 })

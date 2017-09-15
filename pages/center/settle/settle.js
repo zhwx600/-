@@ -14,7 +14,7 @@ Page({
     money: 0,
     moneyStr: "0",
     orderId: '',
-    payInfo:{},
+    payInfo: {},
   },
 
   /**
@@ -138,7 +138,7 @@ Page({
         that.setData({
           payInfo: data
         })
-        
+
         that.handleCallWXPay();
 
       }
@@ -146,60 +146,85 @@ Page({
     });
   },
 
-handleCallWXPay:function(e){
+  handleCallWXPay: function (e) {
 
-var tpayInfo = this.data.payInfo;
-  wx.requestPayment({
-    timeStamp: tpayInfo.timeStamp,
-    nonceStr: tpayInfo.nonceStr,
-    package: tpayInfo.package,
-    signType: tpayInfo.signType,
-    paySign: tpayInfo.paySign,
-    success: function (e) {
-      console.log("success");
-      console.log(e);
-    },
-    fail: function (e) {
-      console.log("fail");
-      console.log(e);
-    },
-    complete: function (e) {
-      console.log("complete");
-      console.log(e);
-      var strs = new Array(); //定义一数组 
-      strs = e.errMsg.split(" "); //字符分割 
-wx.showToast({
-  title: strs[1],
-});
-      if (util.isContains(e.errMsg, "requestPayment:fail") || 
-        util.isContains(e.errMsg, "requestPayment:fail cancel")){//支付失败转到待支付订单列表
-        // wx.showModal({
-        //   title: "提示",
-        //   content: "订单尚未支付",
-        //   showCancel: false,
-        //   confirmText: "确认",
-        //   success: function (res) {
-        //     if (res.confirm) {
-        //       wx.redirectTo({
-        //         url: '../orderdetail/orderdetail',
-        //       });
-        //     }
-        //   }
-        // });
-        // return;
+    var that = this;
+    var tpayInfo = this.data.payInfo;
+    wx.requestPayment({
+      timeStamp: tpayInfo.timeStamp,
+      nonceStr: tpayInfo.nonceStr,
+      package: tpayInfo.package,
+      signType: tpayInfo.signType,
+      paySign: tpayInfo.paySign,
+      success: function (e) {
+        console.log("success");
+        console.log(e);
+      },
+      fail: function (e) {
+        console.log("fail");
+        console.log(e);
+      },
+      complete: function (e) {
+        console.log("complete");
+        console.log(e);
+        var strs = new Array(); //定义一数组 
+        strs = e.errMsg.split(" "); //字符分割 
         // wx.showToast({
-        //   title: e.errMsg,
+        //   title: strs[1],
         // });
+        if (util.isContains(e.errMsg, "requestPayment:fail") ||
+          util.isContains(e.errMsg, "requestPayment:fail cancel")) {//支付失败转到待支付订单列表
+          wx.showModal({
+            title: "提示",
+            content: "订单尚未支付",
+            showCancel: false,
+            confirmText: "确认",
+            success: function (res) {
+              if (res.confirm) {
+                wx.redirectTo({
+                  url: '../orderdetail/orderdetail',
+                });
+              }
+            }
+          });
 
-      //支付成功  
-      }else{
-        wx.redirectTo({
-          url: '../ordercheck/ordercheck',
-        })
+          //支付成功  
+        } else {
+
+          //上报服务端
+          that.requestSubmitOrderSuccess(function (success) {
+            if (success) {
+              console.log('++++++++++++++++上报支付成功----------')
+              wx.redirectTo({
+                url: '../ordercheck/ordercheck',
+              })
+
+            } else {
+              console.log('----------上报支付失败----------')
+              wx.redirectTo({
+                url: '../ordercheck/ordercheck',
+              })
+            }
+
+            that.handleRefreshCart();
+          });
+        }
+      },
+    });
+  },
+
+  handleRefreshCart:function(e){
+    var arr = getCurrentPages();
+    console.log("all page arr", arr);
+
+    var page;
+
+    for(var i in arr){
+      if (arr[i].route == 'pages/center/cart/cart') {
+        arr[i].onLoad();
       }
-    },
-  });
-},
+    }
+  },
 
   requestPayInfo: function (cb) {
 
@@ -212,9 +237,9 @@ wx.showToast({
       url: tUrl,
       data: {
         shopId: getApp().globalData.shopId,
-        oid:this.data.orderId,
+        oid: this.data.orderId,
         openid: getApp().globalData.openid,
-        payType:2,//微信固定为2
+        payType: 2,//微信固定为2
       },
       success: function (res) {
         wx.hideLoading();
@@ -282,6 +307,45 @@ wx.showToast({
           wx.hideLoading();
           console.log(tUrl, '网络请求失败', res.code);
           typeof cb == "function" && cb()
+        }
+
+      }
+    });
+
+  },
+
+  //模拟服务端提交支付成功 回调
+  requestSubmitOrderSuccess: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+
+    var tUrl = api.api.paySuccess;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: getApp().globalData.shopId,
+        oid: this.data.orderId,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '上报成功');
+          typeof cb == "function" && cb(true)
+
+        } else {
+          console.log(tUrl, '上报失败', res.code, res.data);
+          typeof cb == "function" && cb(false)
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb(false)
         }
 
       }

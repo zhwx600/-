@@ -10,6 +10,7 @@ var api = {
   bagInfo: apiRoot + '/shoppingBig/getShoppingBagInfo',
   submitOrder: apiRoot + '/order/createOrder',
   payInfo: apiRoot + '/order/wxAppletPay',
+  paySuccess: apiRoot + '/order/paySuccess',
 };
 
 
