@@ -1,2 +1,55 @@
 <!--pages/center/orderdetail/orderdetail.wxml-->
-<text>pages/center/orderdetail/orderdetail.wxml</text>
+<view class='all-content'>
+
+  <view class="cartList">
+    <view class='space-content'></view>
+    <view class='shop-content'>
+      <image class='shop-content-icon' src='./../../../images/icon_ordersugoo_20x20_@3x.png'></image>
+      <text class='shop-content-name'>订单状态</text>
+      <text class='shop-content-count'>{{status}}</text>
+    </view>
+    <view class='space-content'></view>
+    <view class='shop-content'>
+      <image class='shop-content-icon' src='./../../../images/icon-shop@3x.png'></image>
+      <text class='shop-content-name'>{{orderInfo.shopName}}</text>
+    </view>
+    <!--list item-->
+    <block wx:for="{{orderInfo.goodsInfo}}">
+      <view class="goods " data-index="{{index}}">
+        <view class="content">
+          <text class="goods-name">{{item.goodsName}}</text>
+          <text class="goods-price">￥{{item.price}}</text>
+          <view class='buy-count' data-index="{{index}}">x{{item.count}}</view>
+          <view class="xiaoji-text">
+            <text>小计：￥{{item.total}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class='coupon-content'>
+      <text class='coupon-content-name'>实付款</text>
+      <text class='coupon-content-info'>￥{{moneyStr}}</text>
+    </view>
+    <view class='order-info-content'>
+      <text class='order-content-name'>订单编号:</text>
+      <text class='order-content-info'>￥{{orderInfo.oid}}</text>
+      <button>复制</button>
+    </view>
+    <view class='order-info-content1'>
+      <text class='order-content-name'>创建时间:</text>
+      <text class='order-content-info'>￥{{orderInfo.timeStr}}</text>
+    </view>
+  </view>
+
+  <!--footer-->
+  <view class="total">
+    <view class="total_text">合计：
+      <text>￥{{moneyStr}}</text>
+    </view>
+    <view class="total_coupon_text">促销优惠：
+      <text>￥{{0}}</text>
+    </view>
+    <view class="total_js main-color" bindtap='onTapSettler'>支付</view>
+  </view>
+</view>

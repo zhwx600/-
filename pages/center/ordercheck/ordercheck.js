@@ -11,7 +11,10 @@ Page({
 
     oid: '',
     shopId: '',
-    orderInfo: {}
+    orderInfo: {
+
+    },
+    codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg'
   },
 
   /**
@@ -31,7 +34,7 @@ Page({
       });
 
       if (util.isEmpty(data)) {
-        wx.showLoading({
+        wx.showToast({
           title: '获取订单失败',
         })
       }
@@ -93,46 +96,85 @@ Page({
   },
   onTapOrder: function (e) {
 
+    var oid = this.data.oid;
+    var shopId = this.data.shopId;
+    var tCheckUrl = '../orderdetail/orderdetail' + '?oid=' + oid + '&shopId=' + shopId;
+    wx.navigateTo({
+      url: tCheckUrl,
+    });
   },
   onTapSave: function (e) {
     // 可以通过 wx.getSetting 先查询一下用户是否授权了 "scope.writePhotosAlbum" 这个 scope
-console.log('click',e);
+    console.log('click', e);
+
+    var that = this;
     wx.getSetting({
       success(res) {
         console.log(1111);
         if (!res.authSetting['scope.writePhotosAlbum']) {
+          console.log(3333);
+
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
-            success() {
+            success(res) {
               console.log(22222222);
               // 用户已经同意小程序使用
-              wx.saveImageToPhotosAlbum({
-                filePath: './../../../images/testCode.png',
-                success: function (res) {
-                  console.log('保存成功', res);
-                  wx.showToast({
-                    title: '保存成功',
-                  })
-                }, fail: function (res) {
-                  console.log('保存失败', res);
-                },
-              })
+              that.saveImage(that.data.codeimg);
+            },
+            fail(res) {
+              console.log(888888888, res)
 
+              //添加拒绝授权之后的 容错。 避免拒绝之后 不能再授权
+              wx.openSetting({
+                success(res) {
+                  wx.authorize({
+                    scope: 'scope.writePhotosAlbum',
+                    success() {
+                      console.log(77777777);
+                      // 用户已经同意小程序使用
+                      that.saveImage(that.data.codeimg);
+                    }
+                  })
+                }
+              })
             }
           })
-        }else{
-          wx.saveImageToPhotosAlbum({
-            filePath: './../../../images/testCode.png',
-            success: function (res) {
-              console.log('保存成功', res);
-              wx.showToast({
-                title: '保存成功',
-              })
-            }, fail: function (res) {
-              console.log('保存失败', res);
-            },
-          })
+
+        } else {
+          //已授权
+          console.log(4444);
+          that.saveImage(that.data.codeimg);
         }
+      }
+    })
+
+  },
+
+  saveImage: function (imgurl) {
+    wx.downloadFile({
+      url: imgurl,
+      success: function (res) {
+        console.log('down success path', res.tempFilePath);
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success: function (res) {
+            console.log('保存成功', res);
+            wx.showToast({
+              title: '保存成功',
+            })
+          }, fail: function (res) {
+            console.log('保存失败', res);
+            wx.showToast({
+              title: '保存失败',
+            })
+          },
+        })
+      },
+      fail: function (res) {
+        console.log('down image fail', res);
+        wx.showToast({
+          title: '下载失败',
+        })
       }
     })
 

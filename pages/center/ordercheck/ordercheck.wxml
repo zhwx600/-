@@ -8,7 +8,7 @@
       ” 收银台，出示二维码交由工作人员验证</view>
   </view>
 
-  <image class='qr-code-img' src="./../../../images/testCode.png" bindtap="onTapCode"></image>
+  <image class='qr-code-img' src='{{codeimg}}' bindtap="onTapCode"></image>
 </view>
 
 <view class='order-content'>
