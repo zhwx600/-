@@ -8,8 +8,9 @@
     "pages/center/settle/settle",
     "pages/center/orderlist/orderlist",
     "pages/center/orderdetail/orderdetail",
-    "pages/center/ordercheck/ordercheck",
-    "pages/center/logs/logs"
+    
+    "pages/center/logs/logs",
+    "pages/center/ordercheck/ordercheck"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -183,9 +183,9 @@ Page({
           typeof cb == "function" && cb(res.data)
 
           if (Object.keys(res.data).length == 0) {
-            wx.showToast({
-              title: '获取购物车失败',
-            })
+            // wx.showToast({
+            //   title: '获取购物车失败',
+            // })
           }
 
         } else {

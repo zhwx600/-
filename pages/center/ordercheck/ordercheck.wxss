@@ -1,1 +1,131 @@
 /* pages/center/ordercheck/ordercheck.wxss */
+
+page {
+  background-color: rgb(15, 193, 161);
+}
+
+.code-content {
+  position: absolute;
+  left: 14px;
+  margin-top: 20px;
+  right: 14px;
+  height: 350px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.tip-content {
+  font-size: 14px;
+  width: 560rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-img {
+  margin-right: 5px;
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.tip-text {
+  font-size: 14px;
+  width: 460rpx;
+}
+.tip-text text{
+  color: rgb(254, 98, 84);
+}
+.qr-code-img {
+  /* position: absolute; */
+  margin-top: 20px;
+  width: 450rpx;
+  height: 450rpx;
+}
+
+.order-content {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 380px;
+  height: 170px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 40rpx;
+}
+
+.order-no-tip {
+  color: rgb(254, 98, 84);
+  font-size: 30rpx;
+}
+
+.order-no {
+  color: black;
+  font-size: 28rpx;
+}
+
+.order-time {
+  margin-top: 30rpx;
+  color: rgb(132, 132, 132);
+  font-size: 26rpx;
+}
+
+.fuc-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 50rpx;
+  font-size: 26rpx;
+  margin-bottom: 40rpx;
+}
+
+.btn-order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(15, 193, 161);
+  margin-right: 50rpx;
+  width: 80px;
+  height: 30px;
+  color: white;
+}
+
+.btn-save {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(15, 193, 161);
+  margin-left: 50rpx;
+  width: 80px;
+  height: 30px;
+  color: white;
+}
+
+/* <view class='code-content'>
+  <image class='tip-img' src="./../../../images/icon-check-tip@3x.png"></image>
+  <text class='tip-text'>请前往 “手机自助买单核验通道” 收银台，出示二维码交由工作人员验证</text>
+  <image class='qr-code-img' bindtap="onTapOrder"></image>
+</view>
+
+<view class='order-content'>
+  <view class='order-no-content'>
+    <text class='order-no-tip'>交易单号:</text>
+    <text class='order-no'>q0324234845</text>
+  </view>
+  <view class='order-time'>2017-08-16 14:09:08</view>
+
+  <view class="fuc-box">
+    <view class="btn-order" bindtap="onTapOrder">取消</view>
+    <view class="btn-save" bindtap="onTapSave">加入购物车</view>
+  </view>
+</view> */

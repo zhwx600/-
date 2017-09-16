@@ -1,2 +1,25 @@
 <!--pages/center/ordercheck/ordercheck.wxml-->
-<text>pages/center/ordercheck/ordercheck.wxml</text>
+<view class='code-content'>
+  <view class='tip-content'>
+    <image class='tip-img' src="./../../../images/icon-check-tip@3x.png"></image>
+    <view class='tip-text'>
+      请前往 “
+      <text>手机自助买单核验通道</text>
+      ” 收银台，出示二维码交由工作人员验证</view>
+  </view>
+
+  <image class='qr-code-img' src="./../../../images/testCode.png" bindtap="onTapCode"></image>
+</view>
+
+<view class='order-content'>
+  <view class='order-no-content'>
+    <text class='order-no-tip'>交易单号: </text>
+    <text class='order-no'>{{orderInfo.oid}}</text>
+  </view>
+  <view class='order-time'>{{orderInfo.timeStr}}</view>
+
+  <view class="fuc-box">
+    <view class="btn-order" bindtap="onTapOrder">查看订单</view>
+    <view class="btn-save" bindtap="onTapSave">保存图片</view>
+  </view>
+</view>

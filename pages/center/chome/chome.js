@@ -151,16 +151,25 @@ Page({
   onTapCart: function (e) {
 
     console.log("cart tap", e)
-    wx.navigateTo({
-      url: '../cart/cart',
-    })
+    // wx.navigateTo({
+    //   url: '../cart/cart',
+    // })
     // wx.navigateTo({
     //   url: '../leftswipe/leftswipe',
     // })
     // wx.navigateTo({
     //   url: '../left/left',
     // })
-
+    var oid = '59bb420dba7c2e337ab4d124';
+    var shopId = '5992b8825a8e730418638009';
+    var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
+    wx.navigateTo({
+      url: tCheckUrl,
+    });
+    // var tDetailUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
+    // wx.navigateTo({
+    //   url: tDetailUrl,
+    // })
   },
 
   onTapScan:function(e){

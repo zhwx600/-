@@ -11,6 +11,7 @@ var api = {
   submitOrder: apiRoot + '/order/createOrder',
   payInfo: apiRoot + '/order/wxAppletPay',
   paySuccess: apiRoot + '/order/paySuccess',
+  orderInfo: apiRoot +'/order/getOrderById',
 };
 
 

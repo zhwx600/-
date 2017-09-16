@@ -195,33 +195,39 @@ Page({
           that.requestSubmitOrderSuccess(function (success) {
             if (success) {
               console.log('++++++++++++++++上报支付成功----------')
-              wx.redirectTo({
-                url: '../ordercheck/ordercheck',
-              })
-
             } else {
               console.log('----------上报支付失败----------')
-              wx.redirectTo({
-                url: '../ordercheck/ordercheck',
-              })
             }
 
+            //刷新购物车
             that.handleRefreshCart();
+
+            //跳转到 扫码页面
+            var oid = that.data.orderId;
+            var shopId = getApp().globalData.shopId;
+            var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
+            wx.redirectTo({
+              url: tCheckUrl,
+            })
+
           });
         }
       },
     });
   },
 
-  handleRefreshCart:function(e){
+  handleRefreshCart: function (e) {
     var arr = getCurrentPages();
     console.log("all page arr", arr);
 
     var page;
 
-    for(var i in arr){
+    for (var i in arr) {
       if (arr[i].route == 'pages/center/cart/cart') {
         arr[i].onLoad();
+      }
+      else if (arr[i].route == 'pages/center/scan/scan') {
+        arr[i].onShow();
       }
     }
   },
