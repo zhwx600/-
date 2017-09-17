@@ -225,53 +225,102 @@
 
 /* /----------------/ */
 
-.total {
+.tool-bar {
   position: fixed;
   bottom: 0;
   width: 100%;
   height: 45px;
   display: flex;
   flex-direction: row;
+  /* align-items: center; */
   /* justify-content: space-between; *//* padding: 0 20px; *//* background: greenyellow; */
   border-top: 1rpx solid #ddd;
   font-size: 28rpx;
   background: white;
 }
 
-.total .total_text {
+
+.barcode-button{
+     position: absolute; 
+  margin-top: 10px;
+  left: 10px;
+  width: 72px;
+  height: 26px;
+  font-size: 12px;
+  border: 1rpx solid #ddd;
   display: flex;
-  position: absolute;
-  left: 15px;
-  top: 5px;
-  color: black;
+  flex-direction: row;
+   align-items: center; 
+   justify-content: center;
+
+   background-color: #0FC1A1;
+   color: white;
 }
 
-.total .total_text text {
-  color: red;
-}
-
-.total .total_coupon_text {
+.barcode-delete{
+     position: absolute; 
+  margin-top: 10px;
+  right: 10px;
+  width: 80px;
+  height: 26px;
+  font-size: 12px;
+  border: 1rpx solid #ddd;
   display: flex;
-  position: absolute;
-  left: 15px;
-  top: 25px;
-  font-size: 22rpx;
-  color: rgb(132, 132, 132);
+  flex-direction: row;
+   align-items: center; 
+   justify-content: center;
 }
 
-.total .total_coupon_text text {
-  color: rgb(132, 132, 132);
-}
 
-.total .total_js {
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  height: 45px;
-  width: 100px;
-  margin: 0;
+.barcode-pay{
+     position: absolute; 
+  margin-top: 10px;
+  right: 10px;
+  width: 72px;
+  height: 26px;
+  font-size: 12px;
+  /* border: 1rpx solid #ddd; */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  flex-direction: row;
+   align-items: center; 
+   justify-content: center;
+   background: rgb(254, 98, 84);
+}
+
+.barcode-cancel{
+     position: absolute; 
+  margin-top: 10px;
+  right: 100px;
+  width: 72px;
+  height: 26px;
+  font-size: 12px;
+  border: 1rpx solid #ddd;
+  display: flex;
+  flex-direction: row;
+   align-items: center; 
+   justify-content: center;
+}
+
+
+
+/* ****************************二维码展示 ***************************/
+
+.fullScreen-mask {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  background: white;
+  opacity: 0.9;
+
+    display: flex;
+  flex-direction: row;
+   align-items: center; 
+   justify-content: center;
+}
+.big-barCode{
+  width: 280px;
+  height: 280px;
 }

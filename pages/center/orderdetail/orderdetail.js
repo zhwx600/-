@@ -18,7 +18,8 @@ Page({
     money: 0,
     moneyStr: "0",
     status: '',
-    codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg'
+    codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg',
+    isShowCode:false,
   },
 
   /**
@@ -47,7 +48,7 @@ Page({
       } else if (data.orderStatus == 1) {
         statusStr = '已付款';
       }
-
+      
       that.setData({
         orderInfo: data,
         cartCount: tCount,
@@ -114,10 +115,29 @@ Page({
   onShareAppMessage: function () {
 
   },
-  onTapCode: function (e) {
+  onTapCopy: function (e) {
 
   },
-  onTapOrder: function (e) {
+  onTapCode: function (e) {
+    console.log('code',e);
+    this.setData({
+      isShowCode: true,
+    })
+  },
+  onTapCancelShowCode: function (e) {
+
+  this.setData({
+    isShowCode:false,
+  })
+
+  },
+  onTapDelete: function (e) {
+
+  },
+  onTapCancel: function (e) {
+
+  },
+  onTapPay: function (e) {
 
   },
   onTapSave: function (e) {

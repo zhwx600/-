@@ -34,7 +34,7 @@
     <view class='order-info-content'>
       <text class='order-content-name'>订单编号:</text>
       <text class='order-content-info'>￥{{orderInfo.oid}}</text>
-      <button>复制</button>
+      <button bindtap='onTapCopy'>复制</button>
     </view>
     <view class='order-info-content1'>
       <text class='order-content-name'>创建时间:</text>
@@ -43,13 +43,19 @@
   </view>
 
   <!--footer-->
-  <view class="total">
-    <view class="total_text">合计：
-      <text>￥{{moneyStr}}</text>
+  <view class="tool-bar">
+    <view wx:if="{{orderInfo.orderStatus == 1}}">
+      <button class='barcode-button' bindtap='onTapCode'>二维码</button>
+      <button class='barcode-delete' bindtap='onTapDelete'>删除订单</button>
     </view>
-    <view class="total_coupon_text">促销优惠：
-      <text>￥{{0}}</text>
+    <view wx:if="{{orderInfo.orderStatus == 0}}">
+      <button class='barcode-cancel' bindtap='onTapCancel'>取消</button>
+      <button class='barcode-pay' bindtap='onTapPay'>付款</button>
     </view>
-    <view class="total_js main-color" bindtap='onTapSettler'>支付</view>
   </view>
+</view>
+
+
+<view class='fullScreen-mask' wx:if='{{isShowCode}}' bindtap='onTapCancelShowCode'>
+  <image class='big-barCode' src="{{codeimg}}"></image>
 </view>
