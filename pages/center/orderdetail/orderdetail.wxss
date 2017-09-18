@@ -205,14 +205,23 @@
   color: rgb(169, 169, 169);
 }
 
-.order-info-content button{
+.order-content-info1 {
+  position: absolute;
+  margin-top: 11px;
+  left: 80px;
+  font-size: 13px;
+  color: blue;
+}
+
+.order-content-info2 {
     position: absolute;
-  margin-top: 10px;
-  width: 55px;
+  margin-top: 8px;
+  width: 80px;
   height: 26px;
   right: 15px;
   font-size: 12px;
-  border: 1rpx solid #ddd;
+  /* border: 1rpx solid #ddd; */
+  color: rgb(169, 169, 169);
   display: flex;
   flex-direction: row;
    align-items: center; 
@@ -285,6 +294,7 @@
    align-items: center; 
    justify-content: center;
    background: rgb(254, 98, 84);
+   color: white;
 }
 
 .barcode-cancel{

@@ -12,6 +12,7 @@ var api = {
   payInfo: apiRoot + '/order/wxAppletPay',
   paySuccess: apiRoot + '/order/paySuccess',
   orderInfo: apiRoot +'/order/getOrderById',
+  delOrder: apiRoot +'/order/delOrder',
 };
 
 

@@ -33,12 +33,13 @@
     </view>
     <view class='order-info-content'>
       <text class='order-content-name'>订单编号:</text>
-      <text class='order-content-info'>￥{{orderInfo.oid}}</text>
-      <button bindtap='onTapCopy'>复制</button>
+      <text class='order-content-info1' selectable='true'>{{orderInfo.oid}}</text>
+      
+       <text class='order-content-info2' >长按可复制</text> 
     </view>
     <view class='order-info-content1'>
       <text class='order-content-name'>创建时间:</text>
-      <text class='order-content-info'>￥{{orderInfo.timeStr}}</text>
+      <text class='order-content-info'>{{orderInfo.timeStr}}</text>
     </view>
   </view>
 
