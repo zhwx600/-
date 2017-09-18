@@ -160,12 +160,14 @@ Page({
     // wx.navigateTo({
     //   url: '../left/left',
     // })
+
     var oid = '59baaddbba7c2e337ab4d0ff';
     var shopId = '5992b8825a8e730418638009';
     var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
     wx.navigateTo({
       url: tCheckUrl,
     });
+
     // var tDetailUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
     // wx.navigateTo({
     //   url: tDetailUrl,
@@ -175,9 +177,13 @@ Page({
   onTapScan:function(e){
 
     console.log("onTapScan", e)
+    // wx.navigateTo({
+    //   url: '../scan/scan',
+    // })
+
     wx.navigateTo({
-      url: '../scan/scan',
-    })
+      url: '../orderlist/orderlist',
+    });
   },
 
   /**

@@ -13,6 +13,7 @@ var api = {
   paySuccess: apiRoot + '/order/paySuccess',
   orderInfo: apiRoot +'/order/getOrderById',
   delOrder: apiRoot +'/order/delOrder',
+  orderList: apiRoot +'/order/getOrdersByPages',
 };
 
 
