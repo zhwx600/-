@@ -61,14 +61,20 @@ Page({
 
         var tCount = 0;
         var tMoney = 0;
-        for (var i in data.goodsInfo) {
-          tCount += data[i].goodsInfo.count;
-          tMoney += data[i].goodsInfo.price * data[i].goodsInfo.count;
+        for (var i in data[index].goodsInfo) {
+          tCount += data[index].goodsInfo[i].count;
+          tMoney += data[index].goodsInfo[i].price * data[index].goodsInfo[i].count;
           // data[i].goodsInfo.total = (data[i].goodsInfo.price * data[i].goodsInfo.count).toFixed(2);
         }
         data[index].count = tCount;
         data[index].tmoney = tMoney;
         data[index].moneyStr = tMoney.toFixed(2);
+
+        if (data[index].orderStatus == 0){
+          data[index].statusStr = '待付款';
+        } else if (data[index].orderStatus == 1) {
+          data[index].statusStr = '已付款';
+        }
       }
 
       that.setData({

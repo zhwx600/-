@@ -1,47 +1,54 @@
 <!--pages/center/orderlist/orderlist.wxml-->
 <view class='all-content'>
-  <view class="cart" hidden="{{iscart}}">
+  <view class="no-order" hidden="{{iscart}}">
     <image src="./../../../images/null-cart.png" />
     <view>您还没有订单呢，赶紧购物吧</view>
   </view>
   <!-- <view class='clearContent main-color'></view> -->
   <!--要是有数据，就显示数据-->
-  <view class="cartList" hidden="{{!iscart}}">
+  <view class="orderList" hidden="{{!iscart}}">
     <!--list item-->
-    <block wx:for="{{orderList}}">
-      <view class="goods {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-        <view class="del-cell-btn" catchtap="onTapDelCell" data-index="{{index}}">删除</view>
-        <view class="content">
-          <text class="goods-name">{{item.goodsInfo.goodsName}}</text>
-          <text class="goods-price">￥{{item.goodsInfo.price}}</text>
+    <block wx:for="{{orderList}}" wx:for-item="orderInfo">
+      <view class="order-info" data-index="{{index}}">
+        <view class="order-info-content">
 
-          <view class="goods-btn-box">
-            <image class="del-btn" src='./../../../images/btn-reduce@3x.png' bindtap="onTapCellDelCount" data-index="{{index}}">-
-            </image>
-            <view class='buy-count' data-index="{{index}}">{{item.goodsInfo.count}}</view>
-            <image class="add-btn" src='./../../../images/btn-increase@3x.png' bindtap="onTapCellAddCount" data-index="{{index}}">-
-            </image>
-
+          <view class='space-content'></view>
+          <view class='shop-content'>
+            <image class='shop-content-icon' src='./../../../images/icon-shop@3x.png'></image>
+            <text class='shop-content-name'>{{orderInfo.shopName}}</text>
+            <text class='shop-content-count'>{{orderInfo.statusStr}}</text>
           </view>
+          <!--list item-->
+          <block wx:for="{{orderInfo.goodsInfo}}" wx:for-item="goods" wx:for-index="gIndex">
+            <view class="goods" data-index="{{gIndex}}">
+              <view class="content">
+                <text class="goods-name">{{goods.goodsName}}</text>
+                <text class="goods-price">￥{{goods.price}}</text>
+                <view class="goods-count">
+                  <text>x{{goods.count}}</text>
+                </view>
+              </view>
+            </view>
+          </block>
 
-          <view class="xiaoji-text">小计：
-            <text>￥{{item.goodsInfo.total}}</text>
+          <view class='coupon-content'>
+            <text class='coupon-content-info'>
+              <text>共 {{orderInfo.count}} 件商品 合计:￥</text>{{orderInfo.moneyStr}}</text>
           </view>
-
+          <view class="tool-bar">
+            <view wx:if="{{orderInfo.orderStatus == 1}}">
+              <button class='barcode-delete' bindtap='onTapDelete'>删除订单</button>
+            </view>
+            <view wx:if="{{orderInfo.orderStatus == 0}}">
+              <button class='barcode-cancel' bindtap='onTapCancel'>取消</button>
+              <button class='barcode-pay' bindtap='onTapPay'>付款</button>
+            </view>
+          </view>
         </view>
       </view>
     </block>
   </view>
 
   <!--footer-->
-  <view class="total">
-    <image class='total_scan' src='./../../../images/btn-scan@3x.png' bindtap='onTapScan'></image>
-    <view class="total_text">合计：
-      <text>￥{{moneyStr}}</text>
-    </view>
-    <view class="total_coupon_text">促销优惠：
-      <text>￥{{0}}</text>
-    </view>
-    <view class="total_js main-color" bindtap='onTapSettler'>去结算({{cartCount}})</view>
-  </view>
+
 </view>
