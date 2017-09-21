@@ -33,6 +33,15 @@ Page({
         orderInfo: data
       });
 
+      that.requestOrderQRcode(function (ndata) {
+        console.log('code data', ndata);
+        if (!util.isEmpty(ndata)) {
+          that.setData({
+            codeimg: ndata
+          });
+        }
+      });
+
       if (util.isEmpty(data)) {
         wx.showToast({
           title: '获取订单失败',
@@ -215,5 +224,39 @@ Page({
       }
     });
 
+  },
+  requestOrderQRcode: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.orderQRCode;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: this.data.shopId,
+        oid: this.data.oid,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(res.data)
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb()
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb()
+        }
+
+      }
+    });
   },
 })

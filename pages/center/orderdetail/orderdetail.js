@@ -48,6 +48,16 @@ Page({
         statusStr = '待付款';
       } else if (data.orderStatus == 1) {
         statusStr = '已付款';
+
+        that.requestOrderQRcode(function(data){
+          console.log('code data',data);
+          if(!util.isEmpty(data)){
+            that.setData({
+              codeimg: data
+            });
+          }
+        });
+
       }
 
       that.setData({
@@ -536,6 +546,40 @@ Page({
           wx.hideLoading();
           console.log(tUrl, '网络请求失败', res.code);
           typeof cb == "function" && cb(false)
+        }
+
+      }
+    });
+  },
+  requestOrderQRcode: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.orderQRCode;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: this.data.shopId,
+        oid: this.data.oid,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(res.data)
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb()
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb()
         }
 
       }

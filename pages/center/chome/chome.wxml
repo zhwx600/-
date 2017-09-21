@@ -2,24 +2,24 @@
 <view class="page">
     <view class="page-bottom">
         <view class="page-content">
-            <view bindtap="bindViewTap" class="userinfo">
+            <view  bindtap='onTapHead' class="userinfo">
                 <image class="userinfo-avatar" src="{{userInfo.pic}}" background-size="cover"></image>
                 <text class="userinfo-nickname">{{userInfo.nickname}}</text>
             </view>
 
-            <view class="wc">
+            <view class="wc" bindtap='onTapOrder'>
                 <image class="page-bottom-icon" src="./../../../images/icon-order-l@3x.png"></image>
                 <text>订单</text>
             </view>
-            <view class="wc">
+            <view class="wc" bindtap='onTapMoney'>
                 <image class="page-bottom-icon" src="./../../../images/icon-coupons-l@3x.png"></image>
                 <text>钱包</text>
             </view>
-            <view class="wc">
+            <!-- <view class="wc" bindtap='onTapCheck'>
                 <image class="page-bottom-icon" src="./../../../images/icon-bar-l@3x.png"></image>
                 <text>核验账单</text>
-            </view>
-            <view class="wc">
+            </view> -->
+            <view class="wc" bindtap='onTapSetting'>
                 <image class="page-bottom-icon" src="./../../../images/icon-setup-l@3x.png"></image>
                 <text>设置</text>
             </view>
@@ -29,6 +29,7 @@
         <!--导航栏  -->
         <view class="page-top-nav main-color">
             <image id="headicon1" class="page-top-leftimage" catchtap="tap_ch" src="./../../../images/Male-User@3x.png"></image>
+            <view class='shop-change-content' catchtap="onTapShop">切换店铺<image src='./../../../images/shop-select@3x.png'></image></view>
             <image id="headicon2" class="page-top-rightimage" catchtap="onTapCart" src="./../../../images/shopping-cart@3x.png"></image>
         </view>
         <!--功能区域  -->

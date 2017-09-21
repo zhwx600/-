@@ -78,8 +78,10 @@ page, .page {
     -webkit-transition: All 0.4s ease;
     /* display: inline-flex; */
     border-left: 1px solid gainsboro;
-}
 
+
+   /* align-items: center;  */
+}
 .page-top-leftimage {
     position: absolute;
     width: 48rpx;
@@ -87,6 +89,27 @@ page, .page {
     left: 30rpx;
     top: 20rpx;
     /* background-color: red; */
+}
+
+.shop-change-content{
+  position: relative;
+  /* top: 14px; */
+  width: 300rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 15px;
+    /* background: red; */
+}
+
+.shop-change-content image{
+  margin-left: 5px;
+  margin-top: 2px;
+    width: 24rpx;
+    height: 16rpx;
+    /* left: 300rpx; */
 }
 
 .page-top-rightimage {
@@ -99,6 +122,9 @@ page, .page {
 }
 
 .page-top-nav {
+       display: flex;
+    flex-direction: row;
+    justify-content: center; 
     height: 88rpx;
     width: 100%;
 }

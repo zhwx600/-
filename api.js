@@ -14,6 +14,7 @@ var api = {
   orderInfo: apiRoot +'/order/getOrderById',
   delOrder: apiRoot +'/order/delOrder',
   orderList: apiRoot +'/order/getOrdersByPages',
+  orderQRCode: apiRoot + '/order/createOrderQRcode',
 };
 
 

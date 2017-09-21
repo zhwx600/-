@@ -121,6 +121,16 @@ Page({
 
   },
 
+  onTapOrderInfo:function(e){
+    var index = e.currentTarget.dataset.index;
+    var list = this.data.orderList;
+
+    var tDetailUrl = '../orderdetail/orderdetail' + '?oid=' + list[index].oid + '&shopId=' + list[index].shopId;
+    wx.navigateTo({
+      url: tDetailUrl,
+    });
+  },
+
   requestOrderListInfo: function (cb) {
 
     wx.showLoading({
@@ -163,6 +173,276 @@ Page({
       }
     });
 
+  },
+
+
+  onTapDelete: function (e) {
+
+    var index = e.currentTarget.dataset.index;
+    var list = this.data.orderList;
+    this.data.oid = list[index].oid;
+    this.data.shopId = list[index].shopId;
+
+    var that = this;
+    wx.showModal({
+      title: '',
+      content: "确定删除此订单吗?",
+      showCancel: true,
+      success: function (res) {
+        if (res.confirm) {
+          that.requestDelOrder(function (data) {
+            if (data) {
+              that.onShow();
+            }
+          })
+        }
+      }
+    })
+  },
+
+  onTapCancel: function (e) {
+    var index = e.currentTarget.dataset.index;
+    var list = this.data.orderList;
+    this.data.oid = list[index].oid;
+    this.data.shopId = list[index].shopId;
+
+    var that = this;
+    wx.showModal({
+      title: '',
+      content: "确定取消此订单吗?",
+      showCancel: true,
+      success: function (res) {
+        if (res.confirm) {
+          that.requestDelOrder(function (data) {
+            if (data) {
+              that.onShow();
+            }
+          })
+        }
+      }
+    })
+  },
+  onTapPay: function (e) {
+
+    var index = e.currentTarget.dataset.index;
+    var list = this.data.orderList;
+    this.data.oid = list[index].oid;
+    this.data.shopId = list[index].shopId;
+
+    this.handleRequestPayInfo();
+  },
+  
+  handleRequestPayInfo: function (e) {
+
+    var that = this;
+    this.requestPayInfo(function (data) {
+      if (!util.isEmpty(data)) {
+        // data.timestamp = '1505374389';
+        // data.noncestr = '4uRGjzX9NvYlOTUx';
+        // data.package = 'Sign=WXPay';
+        // data.timestamp = '1505374389';
+        // data.sign = 'DAA041B78A3C2FB0632A49BFA3F88FCE';
+        that.setData({
+          payInfo: data
+        })
+
+        that.handleCallWXPay();
+
+      }
+
+    });
+  },
+
+  handleCallWXPay: function (e) {
+
+    var that = this;
+    var tpayInfo = this.data.payInfo;
+    wx.requestPayment({
+      timeStamp: tpayInfo.timeStamp,
+      nonceStr: tpayInfo.nonceStr,
+      package: tpayInfo.package,
+      signType: tpayInfo.signType,
+      paySign: tpayInfo.paySign,
+      success: function (e) {
+        console.log("success");
+        console.log(e);
+      },
+      fail: function (e) {
+        console.log("fail");
+        console.log(e);
+      },
+      complete: function (e) {
+        console.log("complete");
+        console.log(e);
+        var strs = new Array(); //定义一数组 
+        strs = e.errMsg.split(" "); //字符分割 
+        // wx.showToast({
+        //   title: strs[1],
+        // });
+        if (util.isContains(e.errMsg, "requestPayment:fail") ||
+          util.isContains(e.errMsg, "requestPayment:fail cancel")) {//支付失败转到待支付订单列表
+          wx.showModal({
+            title: "提示",
+            content: "订单尚未支付",
+            showCancel: false,
+            confirmText: "确认",
+            success: function (res) {
+              if (res.confirm) {
+
+              }
+            }
+          });
+
+          //支付成功  
+        } else {
+
+          //上报服务端
+          that.requestSubmitOrderSuccess(function (success) {
+            if (success) {
+              console.log('++++++++++++++++上报支付成功----------')
+            } else {
+              console.log('----------上报支付失败----------')
+            }
+
+            //刷新订单列表
+            that.handleRefreshOrderList();
+
+            //跳转到 扫码页面
+            var oid = that.data.oid;
+            var shopId = that.data.shopId;
+            var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
+            wx.redirectTo({
+              url: tCheckUrl,
+            })
+
+          });
+        }
+      },
+    });
+  },
+
+  handleRefreshOrderList: function (e) {
+    this.onShow();
+  },
+
+  requestPayInfo: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.payInfo;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: this.data.shopId,
+        oid: this.data.oid,
+        openid: getApp().globalData.openid,
+        payType: 2,//微信固定为2
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(res.data)
+
+          if (Object.keys(res.data).length == 0) {
+            wx.showToast({
+              title: '获取支付信息失败',
+            })
+          }
+
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb()
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb()
+        }
+
+      }
+    });
+
+  },
+
+  //模拟服务端提交支付成功 回调
+  requestSubmitOrderSuccess: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+
+    var tUrl = api.api.paySuccess;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: this.data.shopId,
+        oid: this.data.oid,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '上报成功');
+          typeof cb == "function" && cb(true)
+
+        } else {
+          console.log(tUrl, '上报失败', res.code, res.data);
+          typeof cb == "function" && cb(false)
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb(false)
+        }
+
+      }
+    });
+
+  },
+
+  requestDelOrder: function (cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.delOrder;
+    api.requestPost({
+      url: tUrl,
+      data: {
+        shopId: this.data.shopId,
+        oid: this.data.oid,
+        openid: getApp().globalData.openid,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(true)
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb(false)
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb(false)
+        }
+
+      }
+    });
   },
 
 

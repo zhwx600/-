@@ -181,8 +181,9 @@ Page({
             confirmText: "确认",
             success: function (res) {
               if (res.confirm) {
+                var tDetailUrl = '../orderdetail/orderdetail' + '?oid=' + that.data.orderId + '&shopId=' + getApp().globalData.shopId;
                 wx.redirectTo({
-                  url: '../orderdetail/orderdetail',
+                  url: tDetailUrl,
                 });
               }
             }

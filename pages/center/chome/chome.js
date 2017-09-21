@@ -17,8 +17,8 @@ Page({
     staus: 1,
     translate: '',
     userInfo: {
-      pic:'./../../../images/guide-map@3x.png',
-      nickname:'',
+      pic: './../../../images/guide-map@3x.png',
+      nickname: '',
     }
   },
   tap_ch: function (e) {
@@ -151,9 +151,9 @@ Page({
   onTapCart: function (e) {
 
     console.log("cart tap", e)
-    // wx.navigateTo({
-    //   url: '../cart/cart',
-    // })
+    wx.navigateTo({
+      url: '../cart/cart',
+    })
     // wx.navigateTo({
     //   url: '../leftswipe/leftswipe',
     // })
@@ -161,29 +161,28 @@ Page({
     //   url: '../left/left',
     // })
 
-    var oid = '59baaddbba7c2e337ab4d0ff';
-    var shopId = '5992b8825a8e730418638009';
-    var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
-    wx.navigateTo({
-      url: tCheckUrl,
-    });
+    // var oid = '59baaddbba7c2e337ab4d0ff';
+    // var shopId = '5992b8825a8e730418638009';
+    // var tCheckUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
+    // wx.navigateTo({
+    //   url: tCheckUrl,
+    // });
 
     // var tDetailUrl = '../ordercheck/ordercheck' + '?oid=' + oid + '&shopId=' + shopId;
     // wx.navigateTo({
     //   url: tDetailUrl,
     // })
+
+
+
   },
 
-  onTapScan:function(e){
+  onTapScan: function (e) {
 
     console.log("onTapScan", e)
-    // wx.navigateTo({
-    //   url: '../scan/scan',
-    // })
-
     wx.navigateTo({
-      url: '../orderlist/orderlist',
-    });
+      url: '../scan/scan',
+    })
   },
 
   /**
@@ -248,5 +247,49 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  onTapHead: function (e) {
+    this.setData({
+      translate: 'transform: translateX(0px)'
+    })
+    this.data.staus = 1;
+  },
+  onTapOrder: function (e) {
+
+    this.setData({
+      translate: 'transform: translateX(0px)'
+    })
+    this.data.staus = 1;
+
+    wx.navigateTo({
+      url: '../orderlist/orderlist',
+    });
+  },
+  onTapMoney: function (e) {
+    this.setData({
+      translate: 'transform: translateX(0px)'
+    })
+    this.data.staus = 1;
+  },
+  onTapCheck: function (e) {
+    this.setData({
+      translate: 'transform: translateX(0px)'
+    })
+    this.data.staus = 1;
+  },
+  onTapSetting: function (e) {
+    this.setData({
+      translate: 'transform: translateX(0px)'
+    })
+    this.data.staus = 1;
+  },
+  onTapShop: function (e) {
+
+    wx.navigateTo({
+      url: '../shopselect/shopselect',
+    })
+
+  },
+  
 })

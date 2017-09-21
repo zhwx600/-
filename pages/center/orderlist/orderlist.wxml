@@ -9,7 +9,7 @@
   <view class="orderList" hidden="{{!iscart}}">
     <!--list item-->
     <block wx:for="{{orderList}}" wx:for-item="orderInfo">
-      <view class="order-info" data-index="{{index}}">
+      <view class="order-info" data-index="{{index}}" bindtap='onTapOrderInfo'>
         <view class="order-info-content">
 
           <view class='space-content'></view>
@@ -37,11 +37,11 @@
           </view>
           <view class="tool-bar">
             <view wx:if="{{orderInfo.orderStatus == 1}}">
-              <button class='barcode-delete' bindtap='onTapDelete'>删除订单</button>
+              <button class='barcode-delete' data-index="{{index}}" bindtap='onTapDelete'>删除订单</button>
             </view>
             <view wx:if="{{orderInfo.orderStatus == 0}}">
-              <button class='barcode-cancel' bindtap='onTapCancel'>取消</button>
-              <button class='barcode-pay' bindtap='onTapPay'>付款</button>
+              <button class='barcode-cancel' data-index="{{index}}" bindtap='onTapCancel'>取消</button>
+              <button class='barcode-pay' data-index="{{index}}" bindtap='onTapPay'>付款</button>
             </view>
           </view>
         </view>

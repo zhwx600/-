@@ -8,9 +8,9 @@
     "pages/center/settle/settle",
     "pages/center/orderlist/orderlist",
     "pages/center/orderdetail/orderdetail",
-    
     "pages/center/logs/logs",
-    "pages/center/ordercheck/ordercheck"
+    "pages/center/ordercheck/ordercheck",
+    "pages/center/shopselect/shopselect"
   ],
   "window": {
     "backgroundTextStyle": "light",
