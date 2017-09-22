@@ -1,6 +1,8 @@
 // chome.js
 
-var app = getApp()
+var app = getApp();
+var api = require('./../../../api.js');
+var util = require('./../../../utils/util.js');
 
 Page({
 
@@ -19,7 +21,8 @@ Page({
     userInfo: {
       pic: './../../../images/guide-map@3x.png',
       nickname: '',
-    }
+    },
+    shopTitle: '切换店铺',
   },
   tap_ch: function (e) {
     if (this.data.staus == 2) {
@@ -197,7 +200,8 @@ Page({
       that.setData({
         userInfo: userInfo
       })
-    })
+    });
+
   },
 
   /**
@@ -212,6 +216,11 @@ Page({
    */
   onShow: function () {
 
+    if (!util.isEmpty(getApp().globalData.shopId)) {
+      this.setData({
+        shopTitle: getApp().globalData.shopName
+      })
+    }
   },
 
   /**
@@ -246,6 +255,29 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+
+  refreshShop: function (e) {
+    this.setData({
+      shopTitle: getApp().globalData.shopName
+    })
+  },
+
+  refreshRequestShop: function (e) {
+    var that = this;
+    this.requestCityListInfo(1, function (data) {
+
+      if (!util.isEmpty(data.nears)) {
+        var tItem = data.nears[0];
+        getApp().globalData.shopId = tItem.shopid;
+        getApp().globalData.shopName = tItem.shopname;
+        console.log("000000000000378", getApp().globalData.shopName)
+        that.setData({
+          shopTitle: getApp().globalData.shopName
+        })
+      }
+    })
 
   },
 
@@ -291,5 +323,51 @@ Page({
     })
 
   },
-  
+
+
+
+  //ttype 1 城市店铺， 2附近便利店
+  requestCityListInfo: function (ttype, cb) {
+
+    wx.showLoading({
+      title: '',
+      // mask: true,
+    })
+    var tUrl = api.api.cityShop;
+    api.requestGet({
+      url: tUrl,
+      data: {
+        lat: getApp().globalData.latitude,
+        lng: getApp().globalData.longitude,
+        type: ttype,
+      },
+      success: function (res) {
+        wx.hideLoading();
+        if (res.code == 200) {
+          console.log(tUrl, '请求成功', res.data);
+          typeof cb == "function" && cb(res.data)
+
+          if (Object.keys(res.data).length == 0) {
+            // wx.showToast({
+            //   title: '获取购物车失败',
+            // })
+          }
+
+        } else {
+          console.log(tUrl, '请求失败', res.code, res.data);
+          typeof cb == "function" && cb()
+        }
+
+      },
+      fail: function (res) {
+        {
+          wx.hideLoading();
+          console.log(tUrl, '网络请求失败', res.code);
+          typeof cb == "function" && cb()
+        }
+
+      }
+    });
+  },
+
 })

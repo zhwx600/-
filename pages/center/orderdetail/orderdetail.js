@@ -18,7 +18,7 @@ Page({
     money: 0,
     moneyStr: "0",
     status: '',
-    codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg',
+    codeimg: '',
     isShowCode: false,
     payInfo: {}
   },
@@ -49,11 +49,11 @@ Page({
       } else if (data.orderStatus == 1) {
         statusStr = '已付款';
 
-        that.requestOrderQRcode(function(data){
-          console.log('code data',data);
-          if(!util.isEmpty(data)){
+        that.requestOrderQRcode(function(ndata){
+          console.log('code data',ndata);
+          if(!util.isEmpty(ndata)){
             that.setData({
-              codeimg: data
+              codeimg: ndata.qrcodeUrl
             });
           }
         });

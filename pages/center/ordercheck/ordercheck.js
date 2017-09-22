@@ -14,7 +14,8 @@ Page({
     orderInfo: {
 
     },
-    codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg'
+    // codeimg: 'https://img.dd528.com/images/barcode/49401219/49401219.jpg'
+    codeimg: ''
   },
 
   /**
@@ -37,7 +38,7 @@ Page({
         console.log('code data', ndata);
         if (!util.isEmpty(ndata)) {
           that.setData({
-            codeimg: ndata
+            codeimg: ndata.qrcodeUrl
           });
         }
       });

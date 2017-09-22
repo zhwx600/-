@@ -16,7 +16,7 @@
 
 .on {
   color: rgb(254, 98, 84);
-  border-bottom: 5rpx solid rgb(254, 98, 84);
+  border-bottom: 2px solid rgb(254, 98, 84);
 }
 
 .swiper-box {
@@ -28,4 +28,123 @@
 
 .swiper-box view {
   text-align: center;
+}
+
+/*********************************  */
+
+.city {
+  height: 35px;
+  display: flex;
+}
+
+.city-content {
+  position: absolute;
+  /* background: blue;  */
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  height: 35px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+}
+
+.city-content text {
+  padding-left: 15px;
+}
+
+.city-extend-icon {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  /* background: red; */
+  width: 17rpx;
+  height: 9rpx;
+}
+
+.city-all-shop {
+  font-size: 13px;
+  background: rgb(250, 250, 250);
+  color: rgb(153, 153, 153);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: row; *//* align-items: center; */
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+
+.shop-item {
+  background: rgb(250, 250, 250);
+  border: 1rpx solid rgb(153, 153, 153);
+  border-radius: 3px;
+  margin: 5px 5px;
+  padding: 2px 5px;
+}
+
+/*---------------------------------*/
+
+.section-head {
+  background: rgb(246, 246, 246);
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 15px;
+}
+
+.shops {
+  background: #fff;
+  border-bottom: 1rpx solid #ddd;
+  /* margin-bottom: 10px; *//* padding: 10px 10px 0 10px; */
+  height: 60px;
+  display: flex;
+}
+
+.shops .content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  background: white;
+  color: rgb(51, 51, 51);
+}
+
+.shop-name {
+  display: flex;
+  position: absolute;
+  top: 12px;
+  left: 15px;
+  font-size: 14px;
+}
+
+.shop-address {
+  display: flex;
+  position: absolute;
+  bottom: 8px;
+  left: 15px;
+  font-size: 11px;
+  color: rgb(153, 153, 153);
+}
+
+.shop-distance {
+  display: flex;
+  position: absolute;
+  right: 60px;
+  top: 12px;
+  font-size: 11px;
+  color: rgb(153, 153, 153);
+}
+
+.shop-icon {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  width: 28rpx;
+  height: 28rpx;
 }

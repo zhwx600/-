@@ -15,6 +15,7 @@ var api = {
   delOrder: apiRoot +'/order/delOrder',
   orderList: apiRoot +'/order/getOrdersByPages',
   orderQRCode: apiRoot + '/order/createOrderQRcode',
+  cityShop: apiRoot +'/markets/getMaketInfo',
 };
 
 

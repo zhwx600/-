@@ -29,7 +29,7 @@
         <!--导航栏  -->
         <view class="page-top-nav main-color">
             <image id="headicon1" class="page-top-leftimage" catchtap="tap_ch" src="./../../../images/Male-User@3x.png"></image>
-            <view class='shop-change-content' catchtap="onTapShop">切换店铺<image src='./../../../images/shop-select@3x.png'></image></view>
+            <view class='shop-change-content' catchtap="onTapShop">{{shopTitle}}<image src='./../../../images/shop-select@3x.png'></image></view>
             <image id="headicon2" class="page-top-rightimage" catchtap="onTapCart" src="./../../../images/shopping-cart@3x.png"></image>
         </view>
         <!--功能区域  -->

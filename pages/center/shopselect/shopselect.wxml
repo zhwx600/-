@@ -6,15 +6,65 @@
   <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">便利店</view>
 
 </view>
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 43}}px" bindchange="bindChange">
 
-  <!-- 我是哈哈 -->
+  <!-- 我是超市 -->
   <swiper-item>
-    <view>我是超市</view>
+    <scroll-view scroll-y="{{true}}" style="height:{{winHeight - 43}}px">
+      <view class='section-head'>距您最近的超市</view>
+      <block wx:for="{{cityData.nears}}" wx:for-item="shopInfo">
+
+        <view class='shops' bindtap='onTapNearCity' data-item="{{shopInfo}}">
+          <view class="content">
+            <text class="shop-name">{{shopInfo.shopname}}</text>
+            <text class="shop-address">{{shopInfo.address}}</text>
+            <view class="shop-distance">
+              <text>{{shopInfo.distance}}</text>
+            </view>
+            <image class="shop-icon" src='./../../../images/icon_stores_positioning_14x14_@3x.png'></image>
+          </view>
+        </view>
+      </block>
+
+      <block wx:for="{{cityData.cityshop}}" wx:for-item="letters" wx:for-index="letterIndex">
+        <view class='section-head' data-index="{{letterIndex}}" bindtap='onTapLetter'>{{letters.letter}}</view>
+
+        <block wx:for="{{letters.citys}}" wx:for-item="city" wx:for-index="cityIndex">
+          <view class="city">
+            <view class="city-content" data-index="{{cityIndex}}" data-item="{{city}}" data-lindex="{{letterIndex}}" bindtap='onTapCity'>
+              <text>{{city.city}}</text>
+              <image class="city-extend-icon" src='./../../../images/icon_arrow_down_default_8x4_@3x.png'></image>
+            </view>
+          </view>
+          <view class='city-all-shop' wx:if="{{city.isExtend}}">
+            <block wx:for="{{city.shops}}" wx:for-item="shop" wx:for-index="shopIndex">
+              <view class='shop-item' data-item="{{shop}}" bindtap='onTapCityShop'>{{shop.shopname}}</view>
+            </block>
+          </view>
+
+        </block>
+      </block>
+    </scroll-view>
   </swiper-item>
 
-  <!-- 我是呵呵 -->
+
+  <!-- 我是便利店 -->
   <swiper-item>
-    <view>我是便利店</view>
+    <scroll-view scroll-y="{{true}}" style="height:{{winHeight - 43}}px">
+      <view class='section-head'>距您最近的便利店</view>
+      <block wx:for="{{nearData.nears}}" wx:for-item="shopInfo">
+
+        <view class='shops' bindtap='onTapNearCity' data-item="{{shopInfo}}">
+          <view class="content">
+            <text class="shop-name">{{shopInfo.shopname}}</text>
+            <text class="shop-address">{{shopInfo.address}}</text>
+            <view class="shop-distance">
+              <text>{{shopInfo.distance}}</text>
+            </view>
+            <image class="shop-icon" src='./../../../images/icon_stores_positioning_14x14_@3x.png'></image>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
   </swiper-item>
 </swiper>

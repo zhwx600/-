@@ -1,4 +1,5 @@
 var api = require('./api.js');
+var util = require('./utils/util.js');
 
 //app.js
 App({
@@ -131,8 +132,8 @@ App({
 
           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
           // 所以此处加入 callback 以防止这种情况
-          if (this.userInfoReadyCallback) {
-            this.userInfoReadyCallback(res.data)
+          if (that.userInfoReadyCallback) {
+            that.userInfoReadyCallback(res.data)
           }
 
           console.log('server info', that.globalData.userInfo);
@@ -140,13 +141,13 @@ App({
             title: '登录成功',
           })
 
+          that.getLocation();
           //重新刷新首页，以便于数据保证正确
           if (that.firstPage == undefined)
             return;
           wx.redirectTo({
-            url: './pages/center/chome/chome',
+            url: '/pages/center/chome/chome',
           })
-
         }
 
       },
@@ -206,14 +207,41 @@ App({
     }
   },
 
+  getLocation: function (e) {
+    console.log(e)
+    var that = this
+    wx.getLocation({
+      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标  
+      success: function (res) {
+        console.log('经纬度:',res)
+        that.globalData.longitude = res.longitude;
+        that.globalData.latitude = res.latitude;
+
+        var arr = getCurrentPages();
+        for (var i in arr) {
+          if (arr[i].route == 'pages/center/chome/chome') {
+            arr[i].refreshRequestShop();
+          }
+        }
+      },
+      fail:function(res){
+        console.log('经纬度失败:', res);
+      }
+    })
+  },
+
+
+
   globalData: {
+    latitude: '',
+    longitude: '',
     userInfo: {
     },
     //服务端下发的 用户数据
     nuserInfo: {
     },
-    shopId: '5992b8825a8e730418638009',//湖里沃尔玛
-    shopName: '湖里沃尔玛',//湖里沃尔玛
+    shopId: '',//湖里沃尔玛
+    shopName: '',//湖里沃尔玛
     firstPage: null,
     openid: '',//保存登录时的openid
     unionid: ''//保存登录时的unionid
