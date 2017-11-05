@@ -37,12 +37,12 @@ App({
           api.requestGet({
             url: 'https://api.weixin.qq.com/sns/jscode2session',
             data: {
-              appid: 'wxe8596cda75f9d411',
-              secret: '4865e1ac0b99c83643c5ce39566c226c',
+              appid: 'wx143c81e8c73edc77',
+              secret: 'bc8a6ce40521314e54b4ea09ba4e0d52',
               js_code: code
             },
             success: function (res) {
-              console.log('openid 成功11', res);
+              console.log('openid 成功10', res);
               that.globalData.openid = res.openid;
               that.globalData.unionid = res.unionid
 
@@ -90,12 +90,12 @@ App({
       url: 'https://api.weixin.qq.com/sns/jscode2session',
 
       data: {
-        appid: 'wxe8596cda75f9d411',
-        secret: '4865e1ac0b99c83643c5ce39566c226c',
+        appid: 'wx143c81e8c73edc77',
+        secret: 'bc8a6ce40521314e54b4ea09ba4e0d52',
         js_code: rescode
       },
       success: function (res) {
-        console.log('openid 成功11', res);
+        console.log('openid 成功12', res);
 
         that.globalData.openid = res.openid;
         that.globalData.unionid = res.unionid;

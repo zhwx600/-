@@ -1,0 +1,5 @@
+<!--pages/center/TestWeb/TestWeb.wxml-->
+
+<text>测试网页呀</text>
+
+<web-view src="https://www.baidu.com/"></web-view>

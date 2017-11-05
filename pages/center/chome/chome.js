@@ -186,6 +186,10 @@ Page({
     wx.navigateTo({
       url: '../scan/scan',
     })
+
+    // wx.navigateTo({
+    //   url: '../TestWeb/TestWeb',
+    // })
   },
 
   /**

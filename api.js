@@ -1,4 +1,5 @@
-var apiRoot = 'http://120.25.103.145:5501/' + 'mkps';
+// var apiRoot = 'http://120.25.103.145:5501/' + 'mkps';
+var apiRoot = 'https://api.lianxianzhe.com/' + 'mkps';
 
 var api = {
   loginUrl: apiRoot + '/user/appLogIn',
